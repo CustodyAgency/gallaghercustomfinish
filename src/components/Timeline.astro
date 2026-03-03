@@ -1,0 +1,52 @@
+---
+const events = [
+  { year: "1950", title: "Founded", desc: "Thomas F. Gallagher founds the company after returning from Korea. First jobs: residential interiors in Cortland County." },
+  { year: "1962", title: "Commercial Expansion", desc: "Word-of-mouth grows into commercial work. First multi-family contract signed." },
+  { year: "1971", title: "Second Generation", desc: "Second generation joins. Exterior coating specialty established." },
+  { year: "1985", title: "Custom Millwork", desc: "Millwork and custom staining division launched. First historic restoration project." },
+  { year: "1995", title: "EPA Certification", desc: "EPA RRP lead-safe certification added. Historic work expands across Central NY." },
+  { year: "2003", title: "Green Initiative", desc: "Low-VOC and LEED-compliant product lines introduced." },
+  { year: "2005", title: "Third Generation", desc: "Patrick Gallagher takes ownership. Project management systems modernized." },
+  { year: "2012", title: "Fourth Generation", desc: "Sean Gallagher joins as project manager. Fourth generation on site." },
+  { year: "2025", title: "75 Years Strong", desc: "75 years. 5,000+ projects. Still family. Still no subcontractors." }
+];
+---
+<section class="py-24 bg-cream text-charcoal border-y border-gray-200">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+    <h2 class="font-heading font-bold text-4xl mb-4 text-brass">Our History</h2>
+    <p class="text-gray-600 text-xl font-medium">Three generations. The same rule since 1950.</p>
+  </div>
+  
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Continuous Vertical Line -->
+    <div class="absolute top-0 bottom-0 left-[2.25rem] md:left-1/2 w-1 bg-brass/20 md:-translate-x-1/2 rounded-full z-0"></div>
+
+    <div class="space-y-12">
+      {events.map((event, index) => {
+        const isEven = index % 2 === 0;
+        return (
+          <div class={`relative flex flex-col md:flex-row items-start md:items-center w-full group ${isEven ? 'md:flex-row-reverse' : ''}`}>
+            
+            <!-- Mobile spacer to push content past the line -->
+            <div class="hidden md:block md:w-1/2"></div>
+            
+            <!-- The Node (Date) -->
+            <div class={`absolute left-0 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center w-20 h-20 bg-cream border-4 border-brass rounded-full z-10 font-heading font-bold text-charcoal shadow-md transition-colors duration-300 group-hover:bg-brass group-hover:text-cream`}>
+              <div class="text-center">
+                <span class="block text-[10px] uppercase tracking-widest leading-none mb-1 opacity-70">Est</span>
+                <span class="block text-xl leading-none">{event.year}</span>
+              </div>
+            </div>
+            
+            <!-- Content Box -->
+            <div class={`ml-28 md:ml-0 md:w-1/2 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'} pt-2 md:pt-0`}>
+              <h3 class="font-bold text-2xl mb-2 text-charcoal transition-colors duration-300 group-hover:text-brass">{event.title}</h3>
+              <p class="text-lg text-gray-700 leading-relaxed">{event.desc}</p>
+            </div>
+            
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

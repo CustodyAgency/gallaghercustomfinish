@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroCanvas from '../components/HeroCanvas.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Gallagher Custom Finish",
+  "description": "Family-owned painting, staining, and coating contractor serving Syracuse, Cortland, Springfield and Central New York since 1950. No subcontractors. Written warranties. EPA RRP certified.",
+  "url": "https://www.gallaghercustomfinish.com",
+  "telephone": "+13155550192",
+  "email": "estimates@gallaghercustomfinish.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cortland",
+    "addressRegion": "NY",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Syracuse"},
+    {"@type": "City", "name": "Cortland"},
+    {"@type": "City", "name": "Springfield"},
+    {"@type": "City", "name": "Auburn"},
+    {"@type": "City", "name": "Oswego"},
+    {"@type": "City", "name": "Utica"},
+    {"@type": "City", "name": "Rome"},
+    {"@type": "City", "name": "Ithaca"},
+    {"@type": "AdministrativeArea", "name": "Central New York"}
+  ],
+  "foundingDate": "1950",
+  "founder": {
+    "@type": "Person",
+    "name": "Thomas Francis Gallagher"
+  },
+  "priceRange": "$$",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "07:00",
+      "closes": "17:00"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Painting & Finishing Services",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Interior Painting & Finishing", "areaServed": "Central New York"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Exterior Painting & Coatings", "areaServed": "Central New York"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Custom Wood Staining"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Millwork & Trim Finishing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cabinet Refinishing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Historic Restoration"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Commercial & Multi-Family Painting"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Specialty Coatings"}}
+    ]
+  }
+};
+
+const title = "Painting Contractor Syracuse NY | Gallagher Custom Finish | Since 1950";
+const description = "Family-owned painting contractor serving Syracuse, Cortland and Central NY since 1950. No subcontractors, written warranties, itemized estimates. Call (315) 555-0192.";
+
+const testimonials = [
+  {
+    name: "Robert M.",
+    city: "Syracuse",
+    projectType: "Interior Repaint",
+    review: "I'd had two contractors ghost me mid-project in the same year. Gallagher finished four days ahead of schedule. I didn't think that was possible."
+  },
+  {
+    name: "Patricia H.",
+    city: "Cortland",
+    projectType: "Full Interior",
+    review: "As a single woman having work done, I was nervous about strangers in my home. They sent me names of every crew member before they arrived. Same faces every day."
+  },
+  {
+    name: "David K.",
+    city: "Liverpool NY",
+    projectType: "Exterior Coating",
+    review: "Their estimate was higher than two others. They were also the only ones who found rot under the siding. The other bids would have painted right over it."
+  }
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+
+  <!-- Hero Section -->
+  <section class="relative h-screen min-h-[600px] max-h-[1080px] flex items-center justify-center overflow-hidden bg-charcoal">
+    
+    <!-- The 3D Canvas handles both the image and the paint reveal overlay -->
+    <HeroCanvas />
+
+    <!-- A protective dark gradient from the bottom to ensure text legibility -->
+    <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent pointer-events-none z-10"></div>
+
+    <div class="relative z-20 text-center px-4 max-w-5xl mx-auto mt-20">
+      <div class="mb-4 text-brass font-bold text-base tracking-widest uppercase">Central New York's Premier Finisher</div>
+      <h1 class="font-heading font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-cream mb-6 leading-none drop-shadow-md">
+        We Show Up. We Finish. We Stand Behind It.
+      </h1>
+      <p class="text-lg sm:text-xl text-cream/90 max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-sm font-medium">
+        75 years. Three generations of Gallaghers. The same family on every job. Serving Syracuse, Cortland, Springfield and all of Central New York.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+        <a href="/free-painting-estimate-syracuse-cortland-ny/" class="w-full sm:w-auto px-8 py-4 bg-brass text-charcoal font-bold hover:bg-cream transition-colors duration-300 focus-visible:outline-cream rounded text-lg">
+          Get a Free Estimate
+        </a>
+        <a href="/painting-portfolio-central-new-york/" class="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-cream text-cream font-bold hover:bg-cream hover:text-charcoal transition-colors duration-300 focus-visible:outline-cream rounded text-lg">
+          See Our Work
+        </a>
+      </div>
+
+      <p class="text-base font-semibold text-brass uppercase tracking-widest">
+        Est. 1950 &middot; Family Owned &amp; Operated &middot; Licensed &amp; Insured &middot; No Subcontractors &middot; 5,000+ Projects
+      </p>
+    </div>
+  </section>
+
+  <!-- Objection Trust Strip -->
+  <TrustStrip />
+
+  <!-- Services Teaser -->
+  <section class="py-24 bg-cream text-charcoal relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="font-heading font-bold text-4xl sm:text-5xl mb-6">Uncompromising Quality</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">Most contractors paint. We finish. That means surface evaluation, extensive prep work, proper product selection, and flawless execution. Serving Syracuse and surrounding counties.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 lg:p-10 border border-gray-200 shadow-sm rounded-sm group hover:border-brass/30 hover:shadow-md transition-all">
+          <h3 class="font-heading font-bold text-2xl mb-4 group-hover:text-brass transition-colors">Interior Finishing</h3>
+          <p class="text-gray-600 mb-6 leading-relaxed">"The difference between a paint job and a finished room is preparation. We don't skip steps."</p>
+          <a href="/interior-exterior-painting-services-ny/" class="inline-flex items-center text-charcoal font-bold hover:text-brass focus-visible:outline-brass group-hover:underline underline-offset-4">
+            Learn More <span class="ml-2">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="bg-white p-8 lg:p-10 border border-gray-200 shadow-sm rounded-sm group hover:border-brass/30 hover:shadow-md transition-all">
+          <h3 class="font-heading font-bold text-2xl mb-4 group-hover:text-brass transition-colors">Exterior Coatings</h3>
+          <p class="text-gray-600 mb-6 leading-relaxed">"A coat that fails in two years costs more than one done right. We use materials rated for Central New York winters, applied the way manufacturers intend."</p>
+          <a href="/interior-exterior-painting-services-ny/" class="inline-flex items-center text-charcoal font-bold hover:text-brass focus-visible:outline-brass group-hover:underline underline-offset-4">
+            Learn More <span class="ml-2">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="bg-white p-8 lg:p-10 border border-gray-200 shadow-sm rounded-sm group hover:border-brass/30 hover:shadow-md transition-all">
+          <h3 class="font-heading font-bold text-2xl mb-4 group-hover:text-brass transition-colors">Custom Staining & Millwork</h3>
+          <p class="text-gray-600 mb-6 leading-relaxed">"The trim, the doors, the cabinets &mdash; details people notice without knowing why. This is where we separate ourselves."</p>
+          <a href="/interior-exterior-painting-services-ny/" class="inline-flex items-center text-charcoal font-bold hover:text-brass focus-visible:outline-brass group-hover:underline underline-offset-4">
+            Learn More <span class="ml-2">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Strip -->
+  <section class="py-16 bg-charcoal border-y border-brass/20 relative z-10 overflow-hidden">
+    <!-- Subtle background noise -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')] opacity-5 mix-blend-overlay"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-brass/20">
+        <div>
+          <p class="font-heading font-bold text-5xl md:text-6xl text-brass mb-2">75</p>
+          <p class="text-gray-300 font-bold tracking-widest uppercase text-base">Years in Business</p>
+        </div>
+        <div>
+          <p class="font-heading font-bold text-5xl md:text-6xl text-brass mb-2">3</p>
+          <p class="text-gray-300 font-bold tracking-widest uppercase text-base">Generations</p>
+        </div>
+        <div>
+          <p class="font-heading font-bold text-5xl md:text-6xl text-brass mb-2">5,000+</p>
+          <p class="text-gray-300 font-bold tracking-widest uppercase text-base">Projects</p>
+        </div>
+        <div>
+          <p class="font-heading font-bold text-5xl md:text-6xl text-brass mb-2">0</p>
+          <p class="text-gray-300 font-bold tracking-widest uppercase text-base">Jobs Abandoned</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Preview -->
+  <section class="py-24 bg-gray-50 text-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div class="max-w-2xl">
+          <h2 class="font-heading font-bold text-4xl sm:text-5xl mb-4">Don't Take Our Word For It</h2>
+          <p class="text-lg text-gray-600">Our reputation is built on what happens after the job is sold. Read real reviews from neighbors in Syracuse, Cortland, and beyond.</p>
+        </div>
+        <a href="/customer-reviews-gallagher-custom-finish/" class="inline-block flex-shrink-0 text-brass font-bold hover:text-charcoal focus-visible:outline-charcoal transition-colors border-b-2 border-brass hover:border-charcoal pb-1">
+          Read All Reviews &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {testimonials.map((t) => (
+          <TestimonialCard {...t} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead CTA -->
+  <section class="py-24 bg-charcoal text-cream relative">
+    <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brass/50 to-transparent"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <h2 class="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">No Obligation. No Pressure. Just an Honest Look at Your Project.</h2>
+      <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+        We respond within one business day. Serving Syracuse, Cortland, Springfield and within 60 miles.
+      </p>
+      
+      <form action="/free-painting-estimate-syracuse-cortland-ny/" method="GET" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto bg-gray-900/50 p-6 sm:p-4 rounded-sm border border-gray-800 backdrop-blur-sm shadow-xl">
+        <input type="text" name="city" placeholder="Your City (e.g., Syracuse)" required class="flex-1 bg-white text-charcoal px-4 py-3 rounded-sm outline-none focus:ring-2 focus:ring-brass placeholder-gray-500" />
+        <button type="submit" class="bg-brass text-charcoal font-bold px-8 py-3 rounded-sm hover:bg-cream transition-colors shadow-sm focus-visible:outline-cream">
+           Get Started
+        </button>
+      </form>
+    </div>
+  </section>
+
+</BaseLayout>

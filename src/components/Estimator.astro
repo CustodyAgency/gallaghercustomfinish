@@ -1,0 +1,413 @@
+---
+---
+<div class="bg-white p-6 sm:p-10 shadow-lg border border-gray-100 rounded-sm">
+  <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-sm">
+    <p class="text-base text-charcoal font-medium italic">
+      <strong class="text-brass">Disclaimer:</strong> This tool provides rough estimates for budgeting purposes. Actual pricing depends on surface condition, prep requirements, and site access. Request a free on-site estimate for an accurate quote.
+    </p>
+  </div>
+
+  <form id="estimator-form" class="space-y-12">
+    <!-- Section 1: Room/Area Setup -->
+    <section>
+      <h3 class="font-heading font-bold text-2xl mb-6 pb-2 border-b border-gray-100">1. Room & Area Details</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="block text-base font-semibold mb-2">Number of Rooms</label>
+          <input type="number" id="numRooms" min="1" max="20" value="1" class="w-full px-4 py-3 border border-gray-300 focus:border-brass rounded-sm outline-none" />
+        </div>
+        <div>
+          <label class="block text-base font-semibold mb-2">Average Room Size</label>
+          <select id="roomSize" class="w-full px-4 py-3 border border-gray-300 focus:border-brass rounded-sm outline-none bg-white">
+            <option value="120">Small (under 150 sq ft)</option>
+            <option value="225" selected>Medium (150-300 sq ft)</option>
+            <option value="400">Large (300-500 sq ft)</option>
+            <option value="600">Extra Large (500+ sq ft)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-base font-semibold mb-2">Ceiling Height</label>
+          <select id="ceilingHeight" class="w-full px-4 py-3 border border-gray-300 focus:border-brass rounded-sm outline-none bg-white">
+            <option value="8" selected>Standard (8ft)</option>
+            <option value="9">9ft</option>
+            <option value="10">10ft</option>
+            <option value="12">Vaulted / Cathedral (12ft+)</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Exterior Setup -->
+    <section>
+      <div class="flex items-center justify-between mb-6 pb-2 border-b border-gray-100">
+        <h3 class="font-heading font-bold text-2xl">2. Exterior (Optional)</h3>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" id="includeExterior" class="w-5 h-5 text-brass focus:ring-brass rounded-sm border-gray-300" />
+          <span class="text-base font-medium">Include Exterior</span>
+        </label>
+      </div>
+      <div id="exteriorFields" class="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-50 pointer-events-none transition-opacity duration-300">
+        <div>
+          <label class="block text-base font-semibold mb-2">Exterior Sq Footage</label>
+          <input type="number" id="extSqFt" min="0" step="100" value="2000" class="w-full px-4 py-3 border border-gray-300 focus:border-brass rounded-sm outline-none" />
+        </div>
+        <div>
+          <label class="block text-base font-semibold mb-2">Siding Type</label>
+          <select id="sidingType" class="w-full px-4 py-3 border border-gray-300 focus:border-brass rounded-sm outline-none bg-white">
+            <option value="1.75">Vinyl</option>
+            <option value="2.50" selected>Wood</option>
+            <option value="2.75">Cedar Shingle</option>
+            <option value="3.00">Stucco</option>
+            <option value="4.00">Brick / Masonry</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: What Needs Finishing -->
+    <section>
+      <h3 class="font-heading font-bold text-2xl mb-6 pb-2 border-b border-gray-100">3. Scope of Work (Select all that apply)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          { id: 'optWalls', label: 'Walls', checked: true },
+          { id: 'optCeilings', label: 'Ceilings' },
+          { id: 'optTrim', label: 'Trim & Baseboards' },
+          { id: 'optIntDoors', label: 'Doors (Interior)', type: 'number', val: 0 },
+          { id: 'optExtDoors', label: 'Doors (Exterior)', type: 'number', val: 0 },
+          { id: 'optCabinets', label: 'Cabinets (Linear Ft)', type: 'number', val: 0 },
+          { id: 'optWoodStain', label: 'Wood Floors/Stairs (Sq Ft)', type: 'number', val: 0 },
+          { id: 'optDeckStain', label: 'Deck/Fence Stain (Sq Ft)', type: 'number', val: 0 },
+          { id: 'optExtSiding', label: 'Exterior Siding (Must enable Sec 2)' }
+        ].map(opt => (
+          <label class="flex items-start gap-3 p-4 border border-gray-200 rounded-sm hover:border-brass/50 transition-colors cursor-pointer group">
+            <div class="flex h-5 items-center">
+              <input type="checkbox" id={opt.id} class="w-5 h-5 text-brass focus:ring-brass rounded-sm border-gray-300" checked={opt.checked} />
+            </div>
+            <div class="flex flex-col flex-1">
+              <span class="text-base font-semibold">{opt.label}</span>
+              {opt.type === 'number' && (
+                <input type="number" id={`${opt.id}Qty`} min="0" value={opt.val === 0 ? "" : opt.val} placeholder="Qty / Ft" class="mt-2 text-base border-b border-gray-300 outline-none focus:border-brass py-1 bg-transparent w-full transition-opacity opacity-50 group-hover:opacity-100" />
+              )}
+            </div>
+          </label>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 4: Product Quality -->
+    <section>
+      <h3 class="font-heading font-bold text-2xl mb-6 pb-2 border-b border-gray-100">4. Product & Quality Tier</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="block text-base font-semibold mb-2">Paint Quality</label>
+          <div class="space-y-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="paintQuality" value="1.75" class="w-4 h-4 text-brass focus:ring-brass border-gray-300" />
+              <span class="text-base">Standard (Builder-grade)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="paintQuality" value="2.65" class="w-4 h-4 text-brass focus:ring-brass border-gray-300" checked />
+              <span class="text-base">Premium (Regal Select / Duration)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="paintQuality" value="3.75" class="w-4 h-4 text-brass focus:ring-brass border-gray-300" />
+              <span class="text-base">Ultra-Premium (Aura / Emerald)</span>
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-base font-semibold mb-2">Finish Sheen</label>
+          <select id="finishType" class="w-full px-4 py-3 border border-gray-300 focus:border-brass rounded-sm outline-none bg-white">
+            <option value="Flat">Flat / Matte</option>
+            <option value="Eggshell" selected>Eggshell</option>
+            <option value="Satin">Satin</option>
+            <option value="Semi-Gloss">Semi-Gloss</option>
+            <option value="High-Gloss">High-Gloss (Trim/Cabinets)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-base font-semibold mb-2">Number of Coats</label>
+          <div class="space-y-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="coats" value="0.7" class="w-4 h-4 text-brass focus:ring-brass border-gray-300" />
+              <span class="text-base">1 Coat (Refresh)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="coats" value="1.0" class="w-4 h-4 text-brass focus:ring-brass border-gray-300" checked />
+              <span class="text-base">2 Coats (Standard)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="coats" value="1.3" class="w-4 h-4 text-brass focus:ring-brass border-gray-300" />
+              <span class="text-base">3 Coats (Major Color Change)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Prep & Condition -->
+    <section>
+      <h3 class="font-heading font-bold text-2xl mb-6 pb-2 border-b border-gray-100">5. Preparation & Condition</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 content-start gap-6">
+        <div>
+          <label class="block text-base font-semibold mb-2">Surface Condition</label>
+          <select id="condition" class="w-full px-4 py-3 border border-gray-300 focus:border-brass rounded-sm outline-none bg-white">
+            <option value="1.0">Good - Minor cleaning only</option>
+            <option value="1.15" selected>Fair - Some patching needed</option>
+            <option value="1.35">Poor - Significant repair required</option>
+            <option value="1.65">Historic - Full prep & restoration</option>
+          </select>
+        </div>
+        <div class="space-y-4 pt-8">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="wallpaper" class="w-5 h-5 text-brass focus:ring-brass rounded-sm border-gray-300" />
+            <span class="text-base font-semibold">Remove existing wallpaper?</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="leadPaint" class="w-5 h-5 text-brass focus:ring-brass rounded-sm border-gray-300" />
+            <span class="text-base font-semibold">Lead paint present or suspected?</span>
+          </label>
+          <p id="leadWarning" class="text-base text-red-600 hidden bg-red-50 p-3 rounded-sm border border-red-200">
+            <strong>Note:</strong> EPA RRP Lead-safe practices require specialized containment and disposal. This adds significant labor costs not calculated here.
+          </p>
+        </div>
+      </div>
+    </section>
+  </form>
+
+  <!-- Results Output -->
+  <div class="mt-12 p-8 bg-charcoal text-cream rounded-sm shadow-xl relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-brass opacity-10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+    
+    <div class="relative z-10">
+      <h3 class="font-heading font-bold text-xl text-brass mb-2 uppercase tracking-widest">Estimated Project Range</h3>
+      <p class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-8" id="totalEstimate">$0 &ndash; $0</p>
+      
+      <div class="border-t border-gray-700 pt-6 mb-8">
+        <h4 class="text-base font-bold uppercase tracking-wider text-gray-400 mb-4">Itemized Breakdown</h4>
+        <ul id="itemizedList" class="space-y-3 text-base flex flex-col">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+
+      <p class="text-base text-gray-400 italic mb-8 max-w-2xl">
+        This estimate does not include major surface repairs, material cost surges, or site-specific access fees (e.g., scaffolding over stairs). Submitting this form does not guarantee pricing.
+      </p>
+
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-brass text-charcoal font-bold text-lg py-4 px-8 hover:bg-cream transition-colors duration-300 rounded shadow-sm focus-visible:outline-cream">
+        Get a Free On-Site Estimate
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Elements
+  const form = document.getElementById('estimator-form');
+  const leadCheckbox = document.getElementById('leadPaint') as HTMLInputElement;
+  const leadWarning = document.getElementById('leadWarning');
+  const extToggle = document.getElementById('includeExterior') as HTMLInputElement;
+  const extFields = document.getElementById('exteriorFields');
+  const extSidingOpt = document.getElementById('optExtSiding') as HTMLInputElement;
+
+  // Output Elements
+  const totalDisplay = document.getElementById('totalEstimate');
+  const listDisplay = document.getElementById('itemizedList');
+
+  // Listeners
+  if (form) {
+    form.addEventListener('input', calculate);
+    form.addEventListener('change', calculate);
+  }
+
+  if (leadCheckbox && leadWarning) {
+    leadCheckbox.addEventListener('change', () => {
+      if(leadCheckbox.checked) leadWarning.classList.remove('hidden');
+      else leadWarning.classList.add('hidden');
+    });
+  }
+
+  if (extToggle && extFields && extSidingOpt) {
+    extToggle.addEventListener('change', () => {
+      if (extToggle.checked) {
+        extFields.classList.remove('opacity-50', 'pointer-events-none');
+        extSidingOpt.checked = true;
+      } else {
+        extFields.classList.add('opacity-50', 'pointer-events-none');
+        extSidingOpt.checked = false;
+      }
+      calculate();
+    });
+  }
+
+  function getValue(id: string): number {
+    const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+    return el && el.value ? parseFloat(el.value) || 0 : 0;
+  }
+
+  function getRadioValue(name: string): number {
+    const el = document.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement;
+    return el ? parseFloat(el.value) : 0;
+  }
+
+  function isChecked(id: string): boolean {
+    const el = document.getElementById(id) as HTMLInputElement;
+    return el ? el.checked : false;
+  }
+
+  function calculate() {
+    let totalLow = 0;
+    let totalHigh = 0;
+    const items: Array<{name: string, low: number, high: number}> = [];
+
+    // Base math
+    const numRooms = getValue('numRooms');
+    const roomSize = getValue('roomSize');
+    const height = getValue('ceilingHeight');
+    
+    // Approximating wall sq ft per room: (sqrt(sqft)*4)*height 
+    // E.g. 225sqft = 15x15. Perimeter=60. Wall area=60*Height
+    const perimeter = Math.sqrt(roomSize) * 4;
+    const totalWallSqFt = (perimeter * height) * numRooms;
+    const totalCeilSqFt = roomSize * numRooms;
+    const totalTrimLf = perimeter * numRooms; // Assuming baseboards + some casing
+
+    const qualityRateArray = Array.from(document.querySelectorAll('input[name="paintQuality"]')).map(el => parseFloat((el as HTMLInputElement).value));
+    const qualityRate = getRadioValue('paintQuality'); // Base middle range rate selected
+    // Determine the lower and upper bound based on selection to give a range
+    const lowRate = qualityRate - 0.35;
+    const highRate = qualityRate + 0.35;
+
+    const conditionMult = getValue('condition');
+    const coatMult = getRadioValue('coats');
+
+    const globalMult = conditionMult * coatMult;
+
+    // Walls
+    if (isChecked('optWalls')) {
+      const low = totalWallSqFt * lowRate * globalMult;
+      const high = totalWallSqFt * highRate * globalMult;
+      totalLow += low; totalHigh += high;
+      items.push({name: `Walls (${Math.round(totalWallSqFt)} sq ft)`, low, high});
+    }
+
+    // Ceilings (add 20% to wall rate base)
+    if (isChecked('optCeilings')) {
+      const low = totalCeilSqFt * (lowRate * 1.2) * globalMult;
+      const high = totalCeilSqFt * (highRate * 1.2) * globalMult;
+      totalLow += low; totalHigh += high;
+      items.push({name: `Ceilings (${Math.round(totalCeilSqFt)} sq ft)`, low, high});
+    }
+
+    // Trim ($3-$6/lf)
+    if (isChecked('optTrim')) {
+      const trimBaseLow = 3 * (qualityRate / 1.75); // scale by quality
+      const trimBaseHigh = 6 * (qualityRate / 1.75);
+      const low = totalTrimLf * trimBaseLow * globalMult;
+      const high = totalTrimLf * trimBaseHigh * globalMult;
+      totalLow += low; totalHigh += high;
+      items.push({name: `Trim & Baseboards (~${Math.round(totalTrimLf)} Lf)`, low, high});
+    }
+
+    // Doors Int ($75-$150)
+    if (isChecked('optIntDoors')) {
+      const qty = getValue('optIntDoorsQty');
+      if (qty > 0) {
+        const low = qty * 75 * globalMult * (qualityRate / 1.75);
+        const high = qty * 150 * globalMult * (qualityRate / 1.75);
+        totalLow += low; totalHigh += high;
+        items.push({name: `Interior Doors (${qty})`, low, high});
+      }
+    }
+
+    // Doors Ext ($150-$300)
+    if (isChecked('optExtDoors')) {
+      const qty = getValue('optExtDoorsQty');
+      if (qty > 0) {
+        const low = qty * 150 * globalMult * (qualityRate / 1.75);
+        const high = qty * 300 * globalMult * (qualityRate / 1.75);
+        totalLow += low; totalHigh += high;
+        items.push({name: `Exterior Doors (${qty})`, low, high});
+      }
+    }
+
+    // Cabinets ($45-$85/lf)
+    if (isChecked('optCabinets')) {
+      const qty = getValue('optCabinetsQty');
+      if (qty > 0) {
+        const low = qty * 45 * globalMult * (qualityRate / 1.75);
+        const high = qty * 85 * globalMult * (qualityRate / 1.75);
+        totalLow += low; totalHigh += high;
+        items.push({name: `Cabinet Refinishing (${qty} lf)`, low, high});
+      }
+    }
+
+    // Wood Stain ($3-$6)
+    if (isChecked('optWoodStain')) {
+      const qty = getValue('optWoodStainQty');
+      if (qty > 0) {
+        const low = qty * 3 * globalMult;
+        const high = qty * 6 * globalMult;
+        totalLow += low; totalHigh += high;
+        items.push({name: `Interior Wood Staining (${qty} sq ft)`, low, high});
+      }
+    }
+
+    // Deck Stain ($1.50-$3)
+    if (isChecked('optDeckStain')) {
+      const qty = getValue('optDeckStainQty');
+      if (qty > 0) {
+        const low = qty * 1.5 * globalMult;
+        const high = qty * 3.0 * globalMult;
+        totalLow += low; totalHigh += high;
+        items.push({name: `Deck/Fence Staining (${qty} sq ft)`, low, high});
+      }
+    }
+
+    // Exterior Siding
+    if (isChecked('includeExterior') && isChecked('optExtSiding')) {
+      const extSq = getValue('extSqFt');
+      const sidingRate = getValue('sidingType');
+      if (extSq > 0) {
+        const extLow = (sidingRate - 0.5) * extSq * globalMult;
+        const extHigh = (sidingRate + 0.5) * extSq * globalMult;
+        totalLow += extLow; totalHigh += extHigh;
+        items.push({name: `Exterior Siding (${extSq} sq ft)`, low: extLow, high: extHigh});
+      }
+    }
+
+    // Wallpaper removal ($0.75/sqft wall)
+    if (isChecked('wallpaper')) {
+      const wpLow = totalWallSqFt * 0.5;
+      const wpHigh = totalWallSqFt * 1.0;
+      totalLow += wpLow; totalHigh += wpHigh;
+      items.push({name: `Wallpaper Removal`, low: wpLow, high: wpHigh});
+    }
+
+    // Render list
+    if (listDisplay) {
+      listDisplay.innerHTML = items.length === 0 
+        ? '<li class="text-gray-400 italic">No services selected.</li>'
+        : items.map(i => `<li class="flex justify-between border-b border-gray-700 pb-2 mb-2 last:border-0"><span>${i.name}</span> <span class="font-bold text-cream">$${Math.round(i.low).toLocaleString()} &ndash; $${Math.round(i.high).toLocaleString()}</span></li>`).join('');
+    }
+
+    // Render total
+    if (totalDisplay) {
+      if (totalLow === 0 && totalHigh === 0) {
+        totalDisplay.innerHTML = `$0`;
+      } else {
+        // Round to nearest hundred for cleanliness
+        const finalLow = Math.round(totalLow / 100) * 100;
+        const finalHigh = Math.round(totalHigh / 100) * 100;
+        totalDisplay.innerHTML = `$${finalLow.toLocaleString()} &ndash; $${finalHigh.toLocaleString()}`;
+      }
+    }
+  }
+
+  // Initial calculation
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', calculate);
+  } else {
+    calculate();
+  }
+</script>

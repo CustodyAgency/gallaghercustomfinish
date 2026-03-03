@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #1a1a18;
+  --color-cream: #f5f0e8;
+  --color-brass: #b8963e;
+  --color-sage: #7a8c7e;
+
+  --font-heading: "Playfair Display", "serif";
+  --font-body: "DM Sans", "sans-serif";
+}
+
+body {
+  font-size: 1.125rem;
+  /* 18px */
+  line-height: 1.75rem;
+}
+
+@utility text-xs {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+@utility text-sm {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}

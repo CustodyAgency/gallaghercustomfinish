@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortfolioCard from '../../components/PortfolioCard.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+
+const projects = [
+  {
+    imagePath: "/images/portfolio-victorian-brownstone-interior-restoration-syracuse-ny.jpg",
+    title: "Victorian Brownstone Restoration",
+    category: "Historic Interior",
+    description: "Extensive plaster repair and period-accurate color matching for a historic Syracuse brownstone. Trim was meticulously prepped and top-coated with premium self-leveling enamel.",
+    swatchColor: "#6A5D55" // Warm Taupe
+  },
+  {
+    imagePath: "/images/portfolio-farmhouse-exterior-painting-central-new-york.jpg",
+    title: "Central NY Farmhouse Exterior",
+    category: "Residential Exterior",
+    description: "Full exterior scrape, conditioning, and paint. Specialized sealants used on all siding joints and custom milled trim. Included a 10-year written warranty.",
+    swatchColor: "#E2DFC8" // Vintage Cream
+  },
+  {
+    imagePath: "/images/portfolio-historic-church-millwork-restoration-cortland-ny.jpg",
+    title: "Cortland Church Millwork",
+    category: "Commercial Restoration",
+    description: "EPA RRP-compliant lead abatement and detailed restoration of 19th-century church millwork. Custom stain matching applied to heavily degraded sanctuary woodwork.",
+    swatchColor: "#4B3621" // Dark Walnut
+  },
+  {
+    imagePath: "/images/portfolio-kitchen-cabinet-refinishing-gallagher-custom-finish.jpg",
+    title: "Custom Cabinet Refinishing",
+    category: "Cabinets & Millwork",
+    description: "Complete off-site and on-site spray finishing of existing kitchen cabinetry. Converted outdated oak boxes to a factory-smooth, highly durable modern finish.",
+    swatchColor: "#2F4F4F" // Dark Slate Gray
+  },
+  {
+    imagePath: "/images/portfolio-commercial-office-interior-painting-syracuse-ny.jpg",
+    title: "Syracuse Tech Office",
+    category: "Commercial Interior",
+    description: "High-durability scuff-resistant coatings applied to all common areas and hallways. Work completed overnight and on weekends to ensure zero operational downtime for the client.",
+    swatchColor: "#335165" // Steel Blue
+  },
+  {
+    imagePath: "/images/portfolio-garage-epoxy-floor-coating-springfield-ny.jpg",
+    title: "Springfield Garage Epoxy",
+    category: "Floor Coatings",
+    description: "Diamond-grind floor prep followed by a multi-part industrial epoxy coating system. Features high-traction vinyl flake broadcast and polyaspartic clear coat for chemical resistance.",
+    swatchColor: "#A9A9A9" // Industrial Gray
+  },
+  {
+    imagePath: "/images/portfolio-law-office-interior-paint-finish-cortland-ny.jpg",
+    title: "Cortland Law Office",
+    category: "Commercial Interior",
+    description: "Premium low-VOC paints used throughout executive offices and conference rooms. Detailed cut-in work around extensive custom wainscoting and crown molding.",
+    swatchColor: "#5C6A63" // Sage Gray
+  },
+  {
+    imagePath: "/images/portfolio-multi-family-apartment-exterior-painting-syracuse.jpg",
+    title: "Multi-Family Exterior Complex",
+    category: "Commercial Exterior",
+    description: "High-volume exterior painting of a 4-building apartment complex. Handled specialized boom-lift operations and strict timeline coordination with property management.",
+    swatchColor: "#8D9289" // Weathered Green
+  },
+  {
+    imagePath: "/images/portfolio-school-hallway-commercial-painting-central-ny.jpg",
+    title: "Central NY School District",
+    category: "Institutional",
+    description: "Heavy-duty commercial wallcoverings and extreme-wear epoxy paints applied to high-traffic primary school corridors. Strict adherence to state facility safety standards.",
+    swatchColor: "#DBCBA0" // Classic Schoolhouse Gold
+  }
+];
+
+const title = "Painting Portfolio | Syracuse & Central NY | Gallagher Custom Finish";
+const description = "View our recent residential and commercial painting, staining, and cabinet refinishing projects across Syracuse, Cortland, and Central New York.";
+---
+
+<BaseLayout title={title} description={description}>
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-charcoal text-cream">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading font-bold text-5xl md:text-6xl text-cream mb-6 drop-shadow-sm">Our Recent Work</h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto font-medium">
+        We don't use stock photos. Every image here is a project completed by Gallagher Custom Finish employees. Hover over the color swatch on any image to interact.
+      </p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 lg:gap-2">
+        {projects.map((project, index) => (
+          <PortfolioCard {...project} index={index} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+</BaseLayout>

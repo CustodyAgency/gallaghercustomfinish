@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestimonialCard from '../../components/TestimonialCard.astro';
+
+const reviewsData = [
+  { name: "James R.", city: "Syracuse", projectType: "Exterior Painting", review: "I'd been left with an unfinished exterior twice in three years by two different contractors. Gallagher finished four days ahead of schedule.", datePublished: "2024-10-15" },
+  { name: "Carol W.", city: "Cortland", projectType: "Full Interior", review: "They sent me the names and a brief bio of everyone on my crew two days before start. Nobody asked them to. They just did it.", datePublished: "2024-11-02" },
+  { name: "Thomas B.", city: "Cazenovia NY", projectType: "Interior & Millwork", review: "Line-item estimate. Every product specified by name. Every labor step listed. No other contractor gave me anything close to that.", datePublished: "2024-09-28" },
+  { name: "Susan M.", city: "Liverpool NY", projectType: "Exterior & Trim", review: "A section of trim lifted six months after the job. They came back within a week, fixed it, repainted the adjacent wall to match the sheen. No argument. No invoice.", datePublished: "2025-01-14" },
+  { name: "Frank D.", city: "Syracuse", projectType: "Commercial Interior", review: "The owner came to the estimate. One of his crew leads was there every day. Same four people, start to finish.", datePublished: "2024-08-20" },
+  { name: "Linda P.", city: "Manlius NY", projectType: "Exterior Coating", review: "They found water damage behind the fascia that the two cheaper bids missed. That damage would have rotted the whole corner.", datePublished: "2024-07-05" },
+  { name: "Margaret A.", city: "Cortland", projectType: "Interior Painting", review: "They moved my furniture, covered everything, and put it back where it was. My floors looked cleaner when they left than when they arrived.", datePublished: "2024-12-10" },
+  { name: "Brian K.", city: "Syracuse", projectType: "Property Management (200 units)", review: "Gallagher has handled three of our properties over eight years. They've never missed a turnover deadline. Never.", datePublished: "2025-02-01" },
+  { name: "Eleanor V.", city: "Hamilton NY", projectType: "Historic Restoration", review: "Three contractors turned the job down — no lead certification. Gallagher had it, matched the original colors from our archival photos, and the historical society signed off without a revision.", datePublished: "2024-06-18" },
+  { name: "Gary T.", city: "Auburn NY", projectType: "Full Interior", review: "I got a text update every single day. An actual update — 'finished second floor, starting kitchen tomorrow, found a crack in the plaster we'll address before priming.' That's all I wanted.", datePublished: "2024-11-20" },
+  { name: "Diane H.", city: "Ithaca NY", projectType: "Cabinet Refinishing", review: "I was quoted $28,000 to replace my kitchen cabinets. Six months after Gallagher refinished them, guests ask if I got new ones.", datePublished: "2024-10-05" },
+  { name: "Michael C.", city: "Oswego NY", projectType: "Interior Repaint", review: "The final invoice was $40 over the estimate — an extra quart of primer on a water-stained ceiling. They called to tell me before they did it. Forty dollars. They called.", datePublished: "2025-01-28" }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Gallagher Custom Finish",
+  "image": "https://www.gallaghercustomfinish.com/images/interior-painting-contractor-syracuse-ny-gallagher-custom-finish.jpg",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "12",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": reviewsData.map(r => ({
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": r.name
+    },
+    "datePublished": r.datePublished,
+    "reviewBody": r.review
+  }))
+};
+
+const title = "Customer Reviews | Gallagher Custom Finish | Syracuse NY Painter";
+const description = "Real reviews from homeowners and businesses across Central New York. See why customers in Syracuse, Cortland and beyond trust Gallagher Custom Finish.";
+---
+<BaseLayout title={title} description={description} schema={schema}>
+  
+  <section class="pt-32 pb-20 bg-charcoal text-cream text-center border-b border-brass/20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="font-heading font-bold text-5xl md:text-6xl mb-6 text-brass">What Customers Say About Gallagher Custom Finish</h1>
+      <p class="text-xl text-gray-300 font-medium tracking-wide">Serving Syracuse, Cortland, Springfield and Central New York since 1950.</p>
+    </div>
+  </section>
+
+  <section class="py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Masonry Grid CSS approach -->
+      <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+        {reviewsData.map(t => (
+          <div class="break-inside-avoid">
+            <TestimonialCard {...t} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-brass text-charcoal text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="font-heading font-bold text-4xl mb-6">Experience the Difference</h2>
+      <p class="text-xl mb-10 max-w-2xl mx-auto font-medium">Join thousands of Central New York homeowners who never have to search for a painting contractor again.</p>
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-charcoal text-cream font-bold text-lg px-8 py-4 rounded shadow-md hover:bg-white hover:text-charcoal transition-colors duration-300 focus-visible:outline-cream">
+        Request Your Free Estimate
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Estimator from '../../components/Estimator.astro';
+
+const title = "Paint Cost Estimator | Syracuse NY Painting Prices | Gallagher Custom Finish";
+const description = "Estimate your painting or staining project cost in Central New York. Based on real regional pricing. Free on-site estimates always available.";
+---
+
+<BaseLayout title={title} description={description}>
+
+  <section class="pt-32 pb-20 bg-charcoal text-cream text-center border-b border-brass/20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="font-heading font-bold text-5xl md:text-6xl mb-6 text-brass">Paint &amp; Stain Cost Estimator <br class="hidden md:block"/>Central New York</h1>
+      <p class="text-lg md:text-xl text-gray-300 font-medium tracking-wide">Get a ballpark figure before you call. Based on real regional pricing for Syracuse, Cortland, and surrounding areas.</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-cream relative z-10">
+    <!-- Subtle grain behind the estimator -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')] opacity-5 mix-blend-overlay pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Estimator />
+    </div>
+  </section>
+
+  <section class="bg-brass text-charcoal py-16 text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-heading font-bold text-3xl mb-4">Want the exact number?</h2>
+      <p class="text-xl font-medium mb-8">We offer line-by-line itemized estimates for all projects in Central New York. Free and no obligation.</p>
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-charcoal text-cream font-bold text-lg px-8 py-4 rounded shadow-md hover:bg-cream hover:text-charcoal border-2 border-transparent hover:border-charcoal transition-all duration-300 focus-visible:outline-charcoal">
+        Schedule Free On-Site Estimate
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

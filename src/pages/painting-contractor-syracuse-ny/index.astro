@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TeamCard from '../../components/TeamCard.astro';
+import Timeline from '../../components/Timeline.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Gallagher Custom Finish",
+  "foundingDate": "1950",
+  "founder": {
+    "@type": "Person",
+    "name": "Thomas Francis Gallagher"
+  },
+  "slogan": "Three generations. One standard.",
+  "url": "https://www.gallaghercustomfinish.com",
+  "logo": "https://www.gallaghercustomfinish.com/favicon.svg"
+};
+
+const title = "About Gallagher Custom Finish | Syracuse Painting Contractor Since 1950";
+const description = "Three generations of the Gallagher family serving Central New York. Learn our history, meet the team, and understand why we've lasted 75 years.";
+
+const team = [
+  {
+    imagePath: "/images/patrick-gallagher-owner-gallagher-custom-finish-syracuse-ny.jpg",
+    name: "Patrick Thomas Gallagher",
+    role: "Owner & Master Finisher",
+    quote: "My grandfather built this business on the idea that your name goes on every job. That's still true. My name is on every estimate we send."
+  },
+  {
+    imagePath: "/images/sean-gallagher-project-manager-gallagher-custom-finish-ny.jpg",
+    name: "Sean Patrick Gallagher",
+    role: "Lead Project Manager",
+    quote: "I grew up on job sites. I've seen what good prep work looks like and I've seen what skipping it costs a homeowner. We don't skip it."
+  },
+  {
+    imagePath: "/images/colleen-gallagher-estimator-gallagher-custom-finish-cortland-ny.jpg",
+    name: "Colleen Gallagher",
+    role: "Senior Estimator",
+    quote: "I won't give you a number I can't defend line by line. If the estimate surprises you, I'd rather talk through it than have you find out later."
+  }
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  
+  <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-charcoal text-cream overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="/images/custom-finish-craftsman-detail-work-cortland-ny.jpg" alt="Detail finish work by Gallagher Custom Finish, Central New York painting contractor since 1950" class="w-full h-full object-cover" width="1400" height="800" />
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/60"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h1 class="font-heading font-bold text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">Three Generations. One Standard.</h1>
+        <p class="text-xl md:text-2xl text-cream/90 leading-relaxed font-medium">In an industry with a reputation problem, we've spent 75 years being the exception.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="py-20 bg-cream text-charcoal">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-lg font-body leading-loose text-gray-800 space-y-8">
+      <p class="font-heading text-2xl md:text-3xl text-charcoal leading-relaxed">
+        In 1950, Thomas Francis Gallagher came home from Korea with steady hands, a work ethic that wouldn't quit, and a simple belief: leave every job the way you'd want to find your own home.
+      </p>
+      <p>
+        He started with one truck. His son joined in the 1970s. Patrick &mdash; Tom's grandson &mdash; has run the company since 2005. Three generations. The same rule.
+      </p>
+      <p>
+        Most contractors last a few years. We've lasted 75 because we do what we say, finish what we start, and answer the phone when something needs to be made right.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Hard Truth -->
+  <section class="py-20 bg-brass text-charcoal">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading font-bold text-4xl md:text-5xl mb-8">Why Most Contractor Horror Stories Start the Same Way</h2>
+      <p class="text-lg md:text-xl font-medium leading-relaxed max-w-3xl mx-auto">
+        Someone took the lowest bid. The crew that showed up wasn't the one at the estimate. The prep was rushed. The warranty was a handshake that no one honored. We know this story &mdash; our customers tell it to us before they hire us to fix it. We're more expensive than some. We're worth it.
+      </p>
+    </div>
+  </section>
+
+  <Timeline />
+
+  <!-- Meet the Team -->
+  <section class="py-24 bg-gray-50 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-heading font-bold text-4xl sm:text-5xl mb-4 text-charcoal">The People You'll Meet</h2>
+        <p class="text-xl text-gray-600">No anonymous subcontractors. Just our family working for yours.</p>
+      </div>
+      
+      <div class="flex flex-col gap-8 max-w-4xl mx-auto">
+        {team.map(member => (
+          <TeamCard {...member} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Promise Section -->
+  <section class="py-24 bg-charcoal text-cream relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="border-t border-brass pt-6">
+          <p class="font-bold text-xl mb-3">1. You'll know who's coming.</p>
+          <p class="text-gray-400">Crew names provided before every job start.</p>
+        </div>
+        <div class="border-t border-brass pt-6">
+          <p class="font-bold text-xl mb-3">2. The estimate is the price.</p>
+          <p class="text-gray-400">Change orders only happen if scope changes. You approve first.</p>
+        </div>
+        <div class="border-t border-brass pt-6">
+          <p class="font-bold text-xl mb-3">3. We finish what we start.</p>
+          <p class="text-gray-400">No job has ever been abandoned. Not in 75 years.</p>
+        </div>
+        <div class="border-t border-brass pt-6">
+          <p class="font-bold text-xl mb-3">4. We stand behind it.</p>
+          <p class="text-gray-400">Written warranty. We come back if it's not right.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-brass text-charcoal py-10 font-bold text-center">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="text-lg md:text-xl">
+        <span class="uppercase tracking-widest text-base block mb-2 opacity-80">Primary Service Areas</span>
+        Syracuse NY &middot; Cortland NY &middot; Springfield NY &middot; Utica &middot; Rome &middot; Oswego &middot; Auburn &middot; Ithaca <br class="hidden md:block"/> <span class="font-medium opacity-80 mt-2 inline-block">and all areas within 60 miles of Central New York</span>
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>

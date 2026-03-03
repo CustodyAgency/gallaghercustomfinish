@@ -1,0 +1,35 @@
+---
+export interface Props {
+  title: string;
+  scope: string;
+  truth: string;
+  iconPath: string; // SVG path d
+}
+
+const { title, scope, truth, iconPath } = Astro.props;
+---
+<div class="bg-charcoal text-cream p-8 md:p-10 border border-gray-800 flex flex-col group relative overflow-hidden transition-colors hover:border-brass/30">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50 pointer-events-none"></div>
+  
+  <div class="mb-6 relative z-10 w-12 h-12 flex items-center justify-center bg-gray-800 text-brass rounded-sm group-hover:bg-brass group-hover:text-charcoal transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={iconPath} />
+    </svg>
+  </div>
+  
+  <h3 class="font-heading font-bold text-xl lg:text-2xl mb-4 relative z-10 group-hover:text-brass transition-colors">{title}</h3>
+  
+  <div class="mb-6 space-y-2 relative z-10">
+    <p class="text-base uppercase tracking-widest text-brass font-bold">Scope of Work</p>
+    <p class="text-base text-gray-300 leading-relaxed">{scope}</p>
+  </div>
+
+  <div class="mt-auto relative z-10 pt-6 border-t border-gray-800">
+    <p class="text-base uppercase tracking-widest text-gray-500 font-bold mb-2">The Hard Truth</p>
+    <p class="text-base text-gray-400 italic">"{truth}"</p>
+  </div>
+
+  <a href="/free-painting-estimate-syracuse-cortland-ny/" class="absolute inset-0 z-20 focus-visible:outline-brass" aria-label={`Get a quote for ${title}`}>
+    <span class="sr-only">Get a Quote for {title}</span>
+  </a>
+</div>

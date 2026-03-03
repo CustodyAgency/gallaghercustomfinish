@@ -1,0 +1,198 @@
+---
+---
+<form 
+  action="#" 
+  method="POST" 
+  novalidate 
+  class="bg-white p-6 sm:p-10 shadow-lg border border-gray-100 max-w-2xl mx-auto rounded-sm relative z-10"
+  id="lead-form"
+>
+  <div class="space-y-6">
+    <!-- Basic Info -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="space-y-1">
+        <label for="fullName" class="block text-base font-semibold text-charcoal">Full Name <span class="text-red-500" aria-hidden="true">*</span></label>
+        <input type="text" id="fullName" name="fullName" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50" />
+        <p class="text-base text-red-600 hidden" id="fullNameError" role="alert">Please enter your name.</p>
+      </div>
+
+      <div class="space-y-1">
+        <label for="email" class="block text-base font-semibold text-charcoal">Email Address <span class="text-red-500" aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50" />
+        <p class="text-base text-red-600 hidden" id="emailError" role="alert">Please enter a valid email.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="space-y-1">
+        <label for="phone" class="block text-base font-semibold text-charcoal">Phone Number <span class="text-red-500" aria-hidden="true">*</span></label>
+        <input type="tel" id="phone" name="phone" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50" />
+        <p class="text-base text-red-600 hidden" id="phoneError" role="alert">Please enter your phone number.</p>
+      </div>
+
+      <div class="space-y-1">
+        <label for="city" class="block text-base font-semibold text-charcoal">City / Town <span class="text-red-500" aria-hidden="true">*</span></label>
+        <input type="text" id="city" name="city" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50" placeholder="e.g. Syracuse, Cortland" />
+        <p class="text-base text-red-600 hidden" id="cityError" role="alert">Please enter your city to confirm service area.</p>
+      </div>
+    </div>
+
+    <!-- Project Details -->
+    <div class="space-y-1">
+      <label for="serviceType" class="block text-base font-semibold text-charcoal">Service Type</label>
+      <div class="relative">
+        <select id="serviceType" name="serviceType" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50 appearance-none">
+          <option value="">Select a service...</option>
+          <option value="Interior Painting">Interior Painting</option>
+          <option value="Exterior Painting">Exterior Painting</option>
+          <option value="Staining">Staining</option>
+          <option value="Millwork">Millwork</option>
+          <option value="Cabinet Refinishing">Cabinet Refinishing</option>
+          <option value="Historic Restoration">Historic Restoration</option>
+          <option value="Commercial">Commercial</option>
+          <option value="Specialty Coatings">Specialty Coatings</option>
+          <option value="Not Sure Yet">Not Sure Yet</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="space-y-1">
+        <label for="propertyType" class="block text-base font-semibold text-charcoal">Property Type</label>
+        <div class="relative">
+          <select id="propertyType" name="propertyType" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50 appearance-none">
+            <option value="Residential">Residential</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Multi-Family">Multi-Family</option>
+            <option value="Historic/Landmark">Historic/Landmark</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <label for="quoteStatus" class="block text-base font-semibold text-charcoal">Have you had this quoted?</label>
+        <div class="relative">
+          <select id="quoteStatus" name="quoteStatus" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50 appearance-none">
+            <option value="First quote">First quote</option>
+            <option value="Have other quotes">Have other quotes to compare</option>
+            <option value="Bad experiences">Had bad experiences with contractors</option>
+            <option value="Just looking">Just looking for the right fit</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-1">
+      <label for="description" class="block text-base font-semibold text-charcoal">Project Description</label>
+      <textarea id="description" name="description" rows="4" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50 resize-y" placeholder="Tell us what you're working with. Square footage, condition of surfaces, what you're hoping to achieve. We'd rather have too much information than too little."></textarea>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-gray-100 pt-6">
+      <div class="space-y-1">
+        <label for="hearAbout" class="block text-base font-semibold text-charcoal">How did you hear about us?</label>
+        <div class="relative">
+          <select id="hearAbout" name="hearAbout" class="w-full px-4 py-3 border border-gray-300 focus:border-brass focus:ring-1 focus:ring-brass outline-none transition-colors rounded-sm bg-gray-50/50 appearance-none">
+            <option value="Google Search">Google Search</option>
+            <option value="Referral">Referral</option>
+            <option value="Returning Customer">Returning Customer</option>
+            <option value="Drive By">Drive By / Truck</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <span class="block text-base font-semibold text-charcoal">Preferred Contact Method</span>
+        <div class="flex items-center gap-6 mt-2">
+          <label class="flex items-center gap-2 cursor-pointer group">
+            <input type="radio" name="preferredContact" value="Phone" class="text-brass focus:ring-brass cursor-pointer w-4 h-4 border-gray-300" checked />
+            <span class="text-base text-gray-700 group-hover:text-charcoal transition-colors">Phone</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer group">
+            <input type="radio" name="preferredContact" value="Email" class="text-brass focus:ring-brass cursor-pointer w-4 h-4 border-gray-300" />
+            <span class="text-base text-gray-700 group-hover:text-charcoal transition-colors">Email</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer group">
+            <input type="radio" name="preferredContact" value="Either" class="text-brass focus:ring-brass cursor-pointer w-4 h-4 border-gray-300" />
+            <span class="text-base text-gray-700 group-hover:text-charcoal transition-colors">Either</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4">
+      <button type="submit" class="w-full bg-brass text-charcoal font-bold text-lg py-4 px-8 hover:bg-charcoal hover:text-cream transition-colors duration-300 rounded focus-visible:outline-charcoal shadow-sm">
+        Request My Free Estimate
+      </button>
+      <p class="text-base text-center text-gray-500 mt-4 max-w-sm mx-auto">
+        Your information is secure. We never sell data. We simply contact you to discuss your project.
+      </p>
+    </div>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('lead-form') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let isValid = true;
+      const inputs = [
+        { id: 'fullName', errorId: 'fullNameError' },
+        { id: 'email', errorId: 'emailError', type: 'email' },
+        { id: 'phone', errorId: 'phoneError' },
+        { id: 'city', errorId: 'cityError' }
+      ];
+
+      inputs.forEach(input => {
+        const el = document.getElementById(input.id) as HTMLInputElement;
+        const errEl = document.getElementById(input.errorId);
+        if(!el || !errEl) return;
+        
+        let valid = true;
+        if (!el.value.trim()) valid = false;
+        if (input.type === 'email' && el.value.trim() && !el.value.includes('@')) valid = false;
+
+        if (!valid) {
+          isValid = false;
+          el.classList.add('border-red-500', 'bg-red-50');
+          el.setAttribute('aria-invalid', 'true');
+          errEl.classList.remove('hidden');
+        } else {
+          el.classList.remove('border-red-500', 'bg-red-50');
+          el.setAttribute('aria-invalid', 'false');
+          errEl.classList.add('hidden');
+        }
+      });
+
+      if (isValid) {
+        // Here we would submit the form data to an endpoint
+        form.innerHTML = `
+          <div class="text-center py-16 px-4">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="font-heading font-bold text-2xl text-charcoal mb-4">Request Received</h3>
+            <p class="text-gray-600">Thank you. We will review your project details and contact you within one business day.</p>
+          </div>
+        `;
+      }
+    });
+  }
+</script>

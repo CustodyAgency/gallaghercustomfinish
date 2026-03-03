@@ -1,0 +1,127 @@
+---
+export interface Props {
+  imagePath: string;
+  title: string;
+  category: string;
+  description: string;
+  swatchColor: string;
+  index: number;
+}
+
+const { imagePath, title, category, description, swatchColor, index } = Astro.props;
+const canvasId = `swatch-${index}`;
+---
+<article class="group relative overflow-hidden bg-charcoal aspect-[4/3] w-full block focus-visible:outline-brass cursor-pointer" data-swatch-color={swatchColor} data-canvas-id={canvasId} tabindex="0">
+  <img 
+    src={imagePath} 
+    alt={title} 
+    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-40"
+    loading="lazy" 
+    width="800" 
+    height="600"
+  />
+  
+  <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+
+  <!-- Content -->
+  <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 z-10 flex flex-col justify-end h-full">
+    <div class="mb-2">
+      <span class="inline-block text-base font-bold tracking-widest text-charcoal bg-brass px-2 py-1 uppercase">{category}</span>
+    </div>
+    <h3 class="font-heading font-bold text-xl sm:text-2xl text-cream mb-2 leading-tight">{title}</h3>
+    <p class="text-gray-300 text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 max-w-sm line-clamp-3">
+      {description}
+    </p>
+  </div>
+
+  <!-- 3D Swatch Canvas Container -->
+  <div class="absolute top-6 right-6 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
+    <canvas id={canvasId} class="w-full h-full"></canvas>
+  </div>
+</article>
+
+<script>
+  import * as THREE from 'three';
+
+  // We initialize the swatches on idle or interaction
+  const initSwatches = () => {
+    const cards = document.querySelectorAll('article[data-swatch-color]');
+    
+    cards.forEach((card) => {
+      const colorHex = card.getAttribute('data-swatch-color') || '#ffffff';
+      const canvasId = card.getAttribute('data-canvas-id');
+      const canvas = document.getElementById(canvasId as string) as HTMLCanvasElement;
+      
+      if (!canvas) return;
+
+      let isHovered = false;
+      let rafId = 0;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(64, 64);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10);
+      camera.position.z = 3;
+
+      const geometry = new THREE.SphereGeometry(1, 32, 32);
+      const material = new THREE.MeshStandardMaterial({ 
+        color: new THREE.Color(colorHex),
+        roughness: 0.3,
+        metalness: 0.1
+      });
+      const sphere = new THREE.Mesh(geometry, material);
+      scene.add(sphere);
+
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+      
+      const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+      dirLight.position.set(2, 2, 2);
+      scene.add(dirLight);
+
+      const animate = () => {
+        if (!isHovered) return;
+        rafId = requestAnimationFrame(animate);
+        sphere.rotation.y += 0.02;
+        sphere.rotation.x += 0.01;
+        renderer.render(scene, camera);
+      };
+
+      card.addEventListener('mouseenter', () => {
+        isHovered = true;
+        animate();
+      });
+
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        cancelAnimationFrame(rafId);
+        // reset rotation slightly for next hover
+        sphere.rotation.set(0,0,0);
+        renderer.render(scene, camera); // render idle frame
+      });
+      
+      card.addEventListener('focus', () => {
+        isHovered = true;
+        animate();
+      });
+      
+      card.addEventListener('blur', () => {
+        isHovered = false;
+        cancelAnimationFrame(rafId);
+      });
+
+      // Render one initial frame so it's ready when opacity transitions
+      renderer.render(scene, camera);
+    });
+  };
+
+  // Run on load
+  if (document.readyState === 'complete') {
+    initSwatches();
+  } else {
+    window.addEventListener('load', initSwatches);
+  }
+</script>

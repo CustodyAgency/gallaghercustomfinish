@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+
+const services = [
+  {
+    title: "Interior Painting & Finishing",
+    scope: "Surface repair, skim coat, primer, minimum two finish coats, full protection, complete cleanup.",
+    truth: "Most low bids skip the primer coat and call one coat 'done.' You'll see it within a year.",
+    iconPath: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+    areaServed: "Central New York"
+  },
+  {
+    title: "Exterior Painting & Coatings",
+    scope: "Full inspection, rot identification, pressure washing, spot priming, elastomeric or weather-rated finishes.",
+    truth: "Painting over rot or failed caulk is hiding a problem. We find it first.",
+    iconPath: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
+    areaServed: "Central New York"
+  },
+  {
+    title: "Custom Wood Staining",
+    scope: "Grain prep, conditioner, solid or semi-transparent stain, UV topcoat.",
+    truth: "Stain without conditioning blotches and raises grain. It can't be undone without sanding back to bare wood.",
+    iconPath: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+    areaServed: "Central New York"
+  },
+  {
+    title: "Millwork & Trim Finishing",
+    scope: "Doors, windows, crown, baseboards — spray or brush by site condition, factory-smooth result.",
+    truth: "Trim is where brush marks and holidays show up most. We don't rush it.",
+    iconPath: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+    areaServed: "Central New York"
+  },
+  {
+    title: "Cabinet Refinishing",
+    scope: "Full degloss, prime, spray finish, hardware reattachment, final inspection.",
+    truth: "Roll-applied cabinet paint looks fine for six months. Then the texture shows and the edges chip.",
+    iconPath: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z",
+    areaServed: "Syracuse & Surrounding Areas"
+  },
+  {
+    title: "Historic Restoration",
+    scope: "Period-correct color matching, EPA RRP lead-safe practices, preservation-grade coatings, landmark documentation.",
+    truth: "Historic work requires certification most contractors don't carry. Lead-safe practices are federal law, not optional.",
+    iconPath: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+    areaServed: "Central New York"
+  }
+];
+
+const featuredTestimonials = [
+  { name: "Patricia H.", city: "Cortland", projectType: "Full Interior", review: "As a single woman having work done, I was nervous about strangers in my home. They sent me names of every crew member before they arrived. Same faces every day." },
+  { name: "David K.", city: "Liverpool NY", projectType: "Exterior Coating", review: "Their estimate was higher than two others. They were also the only ones who found rot under the siding. The other bids would have painted right over it." },
+  { name: "Robert M.", city: "Syracuse", projectType: "Interior Repaint", review: "I'd had two contractors ghost me mid-project in the same year. Gallagher finished four days ahead of schedule. I didn't think that was possible." },
+  { name: "Thomas B.", city: "Cazenovia NY", projectType: "Interior & Millwork", review: "Line-item estimate. Every product specified by name. Every labor step listed. No other contractor gave me anything close to that." },
+  { name: "Diane H.", city: "Ithaca NY", projectType: "Cabinet Refinishing", review: "I was quoted $28,000 to replace my kitchen cabinets. Six months after Gallagher refinished them, guests ask if I got new ones." }
+];
+
+const schemaArray = services.map(s => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": s.title,
+  "description": s.scope,
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Gallagher Custom Finish"
+  },
+  "areaServed": s.areaServed
+}));
+
+const title = "Painting & Finishing Services | Syracuse, Cortland, Central NY";
+const description = "Interior, exterior, staining, millwork, cabinet refinishing, historic restoration and commercial painting in Central New York. EPA RRP certified.";
+---
+
+<BaseLayout title={title} description={description} schema={schemaArray}>
+
+  <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-charcoal text-cream overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay">
+      <img src="/images/custom-finish-craftsman-detail-work-cortland-ny.jpg" alt="Detail finish work" class="w-full h-full object-cover" />
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="mb-4 text-brass font-bold text-sm tracking-widest uppercase">The Finish Matters</div>
+      <h1 class="font-heading font-bold text-5xl md:text-6xl text-cream mb-6 drop-shadow-sm">Painting &amp; Finishing Services <br class="hidden md:block"/>in Central New York</h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto font-medium mb-10">It's not just about color. It's about preparation, application, and lasting durability. See what makes our process different.</p>
+      
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#services-list" class="inline-flex justify-center border-2 border-brass text-cream font-bold text-lg px-8 py-4 rounded hover:bg-brass hover:text-charcoal transition-colors focus-visible:outline-brass mt-4">
+          Explore Services
+        </a>
+        <a href="/paint-cost-estimator-syracuse-ny/" class="inline-flex justify-center bg-brass text-charcoal font-bold text-lg px-8 py-4 rounded hover:bg-cream transition-colors focus-visible:outline-cream mt-4">
+          Try Our Cost Estimator
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process / Philosophy Section -->
+  <section class="py-24 bg-cream text-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="font-heading font-bold text-4xl mb-6">Preparation is Everything</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Eighty percent of a lasting finish happens before a drop of paint is applied. Most contractors rush the prep work because homeowners can't see it until a year later when the paint begins to fail.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            We scrape, sand, prime, and condition every surface. We repair drywall imperfections, replace rotted trim, and seal gaps properly. When the finish coat goes on, it's going on a flawless foundation.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-brass flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span class="font-medium">Thorough surface evaluation and repair</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-brass flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span class="font-medium">Premium product selection matched to the environment</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-brass flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span class="font-medium">Flawless execution by our own trained employees</span>
+            </li>
+          </ul>
+        </div>
+        <div class="relative h-96 lg:h-full min-h-[400px]">
+          <img src="/images/interior-painting-contractor-syracuse-ny-gallagher-custom-finish.jpg" alt="Professional painting execution" class="absolute inset-0 w-full h-full object-cover rounded shadow-xl" />
+          <div class="absolute -bottom-6 -left-6 bg-charcoal text-cream p-6 rounded shadow-lg max-w-sm">
+            <p class="font-bold text-brass mb-1 uppercase tracking-wider text-sm">Our Promise</p>
+            <p class="font-heading text-xl">We don't skip steps. Ever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Strip -->
+  <section id="services-list" class="py-24 bg-gray-50 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-heading font-bold text-4xl mb-4">Our Core Services</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Expertise across every discipline of residential and commercial finishing.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map(s => (
+          <ServiceCard {...s} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+  <!-- Testimonial Carousel -->
+  <section class="py-24 bg-cream text-charcoal border-t border-brass/20 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
+      <h2 class="font-heading font-bold text-4xl">What Our Clients Are Saying</h2>
+      <TestimonialCarousel testimonials={featuredTestimonials} />
+      
+      <div class="pt-8">
+        <a href="/customer-reviews-gallagher-custom-finish/" class="inline-flex font-bold text-charcoal border-b-2 border-brass hover:border-charcoal pb-1 transition-colors">
+          Read All Reviews &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 bg-charcoal text-center text-cream">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="font-heading font-bold text-4xl mb-6 text-brass">Ready to get an honest number?</h2>
+      <p class="text-xl mb-10 max-w-2xl mx-auto font-medium">Use our cost estimator to get a ballpark figure, or schedule a free on-site consultation for an exact quote.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="/paint-cost-estimator-syracuse-ny/" class="inline-block border-2 border-brass text-cream font-bold text-lg px-8 py-4 rounded hover:bg-brass hover:text-charcoal transition-colors duration-300 focus-visible:outline-brass">
+          Cost Estimator
+        </a>
+        <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-brass text-charcoal font-bold text-lg px-8 py-4 rounded shadow-md hover:bg-cream hover:text-charcoal transition-colors duration-300 focus-visible:outline-cream">
+          Schedule Free Estimate
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
