@@ -33,7 +33,7 @@ const events = [
             <!-- The Node (Date) -->
             <div class={`absolute left-0 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center w-20 h-20 bg-cream border-4 border-brass rounded-full z-10 font-heading font-bold text-charcoal shadow-md transition-colors duration-300 group-hover:bg-brass group-hover:text-cream`}>
               <div class="text-center">
-                <span class="block text-[10px] uppercase tracking-widest leading-none mb-1 opacity-70">Est</span>
+                {index === 0 && <span class="block text-[10px] uppercase tracking-widest leading-none mb-1 opacity-70">Est</span>}
                 <span class="block text-xl leading-none">{event.year}</span>
               </div>
             </div>
