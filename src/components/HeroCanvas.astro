@@ -78,17 +78,17 @@
 
     private generateStrokes() {
       this.strokes = [];
-      const numStrokes = Math.ceil(this.width / 150) + 2; // Roughly one stroke every 150px
-      const strokeWidthMax = 250;
-      const strokeWidthMin = 180;
+      const numStrokes = Math.ceil(this.width / 80) + 4; // Much higher density to guarantee coverage
+      const strokeWidthMax = 350;
+      const strokeWidthMin = 250;
       
-      // We want them to overlap slightly and go top to bottom
+      // We want them to overlap heavily and go top to bottom
       for (let i = 0; i < numStrokes; i++) {
         // Base X position distributed across screen width
         const baseX = (this.width / numStrokes) * i;
         
         // Add some randomness to x position
-        const offsetX = (Math.random() - 0.5) * 100;
+        const offsetX = (Math.random() - 0.5) * 50; // Tighter offset
         const x = baseX + offsetX;
         
         // Randomize direction slightly (mostly vertical)

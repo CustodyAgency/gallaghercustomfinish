@@ -11,7 +11,7 @@ export interface Props {
 const { imagePath, title, category, description, swatchColor, index } = Astro.props;
 const canvasId = `swatch-${index}`;
 ---
-<article class="group relative overflow-hidden bg-charcoal aspect-[4/3] w-full block focus-visible:outline-brass cursor-pointer" data-swatch-color={swatchColor} data-canvas-id={canvasId} tabindex="0">
+<article class="js-slideshow-trigger group relative overflow-hidden bg-charcoal aspect-[4/3] w-full block focus-visible:outline-brass cursor-pointer" data-swatch-color={swatchColor} data-canvas-id={canvasId} data-index={index} tabindex="0">
   <img 
     src={imagePath} 
     alt={title} 
