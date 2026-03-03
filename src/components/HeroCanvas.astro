@@ -1,245 +1,204 @@
 ---
 ---
 <div id="canvas-container" class="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-charcoal">
-  <canvas id="hero-canvas" class="w-full h-full" aria-hidden="true" aria-label="Animated paint texture, decorative"></canvas>
-  <!-- Protective gradient to ensure text legibility -->
-  <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent pointer-events-none z-10"></div>
+  <!-- The base image that will get painted over -->
+  <img 
+    src="/images/interior-painting-contractor-syracuse-ny-gallagher-custom-finish.jpg" 
+    alt="Interior painting contractor" 
+    class="absolute inset-0 w-full h-full object-cover" 
+  />
+  
+  <!-- The canvas where the teal paint strokes will be drawn -->
+  <canvas id="hero-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true" aria-label="Animated paint texture, decorative"></canvas>
+  
+  <!-- Protective gradient to ensure text legibility always -->
+  <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent pointer-events-none z-10"></div>
 </div>
 
 <script>
-  import * as THREE from 'three';
-
-  class PaintCanvas {
+  class PaintRollerCanvas {
     private canvas: HTMLCanvasElement;
-    private renderer: THREE.WebGLRenderer;
-    private scene: THREE.Scene;
-    private camera: THREE.PerspectiveCamera;
-    private material: THREE.ShaderMaterial;
-    private mesh: THREE.Mesh;
+    private ctx: CanvasRenderingContext2D;
+    private width: number = 0;
+    private height: number = 0;
     private rafId: number = 0;
     private isVisible: boolean = true;
-    private clock = new THREE.Clock();
+    
+    // Custom Teal Color
+    private paintColor = '#4a8f96';
+    
+    // Animation state
+    private startTime: number = 0;
+    private animationDuration: number = 10000; // 10 seconds total
+    
+    // Pre-calculated stroke paths
+    private strokes: Array<{
+      startX: number,
+      startY: number,
+      endX: number,
+      endY: number,
+      width: number,
+      delay: number, // percentage of total duration when it starts
+      duration: number // percentage of total duration it takes to finish
+    }> = [];
 
     constructor(canvas: HTMLCanvasElement) {
       this.canvas = canvas;
+      const context = canvas.getContext('2d', { alpha: true });
+      if (!context) return;
+      this.ctx = context;
+      
       this.init();
       this.bindEvents();
+      
+      // Start animation
+      this.startTime = performance.now();
       this.animate();
     }
 
     private init() {
-      try {
-        this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, alpha: false, antialias: true });
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      } catch (e) {
-        console.warn("WebGL not supported, hiding canvas");
-        if(this.canvas.parentElement) this.canvas.parentElement.style.display = 'none';
-        return;
+      this.resize();
+      this.generateStrokes();
+    }
+
+    private resize() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      
+      // Handle high-DPI displays safely
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      this.canvas.width = this.width * dpr;
+      this.canvas.height = this.height * dpr;
+      
+      this.ctx.scale(dpr, dpr);
+      
+      // If we resize, recalculate strokes to fit new dimensions
+      this.generateStrokes();
+    }
+
+    private generateStrokes() {
+      this.strokes = [];
+      const numStrokes = Math.ceil(this.width / 150) + 2; // Roughly one stroke every 150px
+      const strokeWidthMax = 250;
+      const strokeWidthMin = 180;
+      
+      // We want them to overlap slightly and go top to bottom
+      for (let i = 0; i < numStrokes; i++) {
+        // Base X position distributed across screen width
+        const baseX = (this.width / numStrokes) * i;
+        
+        // Add some randomness to x position
+        const offsetX = (Math.random() - 0.5) * 100;
+        const x = baseX + offsetX;
+        
+        // Randomize direction slightly (mostly vertical)
+        const angle = (Math.random() - 0.5) * 0.2; // slight tilt
+        
+        const strokeLength = this.height * 1.5; // ensure it covers top to bottom
+        
+        // Stagger the start times so they don't all paint at once
+        // For example, start scattered between 0% and 50% of the duration
+        const delay = Math.random() * 0.5;
+        
+        // Each stroke takes between 30% and 50% of the total time to finish
+        const duration = 0.3 + (Math.random() * 0.2);
+
+        this.strokes.push({
+          startX: x,
+          startY: -200, // start above screen
+          endX: x + Math.sin(angle) * strokeLength,
+          endY: this.height + 200, // end below screen
+          width: strokeWidthMin + Math.random() * (strokeWidthMax - strokeWidthMin),
+          delay: delay,
+          duration: duration
+        });
       }
       
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      this.renderer.setSize(width, height);
-
-      this.scene = new THREE.Scene();
-      
-      this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-      this.camera.position.z = 3;
-
-      // Load the texture
-      const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load('/images/interior-painting-contractor-syracuse-ny-gallagher-custom-finish.jpg');
-
-      this.material = new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0 },
-          uTexture: { value: texture },
-          uImageAspect: { value: 1920 / 1080 }, // Original image aspect ratio
-          uPlaneAspect: { value: width / height },
-          uPaintColor: { value: new THREE.Color('#4a8f96') } // Teal color for the paint
-        },
-        vertexShader: `
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `,
-        fragmentShader: `
-          uniform float uTime;
-          uniform sampler2D uTexture;
-          uniform float uImageAspect;
-          uniform float uPlaneAspect;
-          uniform vec3 uPaintColor;
-          
-          varying vec2 vUv;
-
-          // Classic Perlin noise, periodic version
-          vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
-          vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
-          vec3 fade(vec3 t) {return t*t*t*(t*(t*6.0-15.0)+10.0);}
-
-          float cnoise(vec3 P){
-            vec3 Pi0 = floor(P);
-            vec3 Pi1 = Pi0 + vec3(1.0);
-            Pi0 = mod(Pi0, 289.0);
-            Pi1 = mod(Pi1, 289.0);
-            vec3 Pf0 = fract(P);
-            vec3 Pf1 = Pf0 - vec3(1.0);
-            vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
-            vec4 iy = vec4(Pi0.yy, Pi1.yy);
-            vec4 iz0 = Pi0.zzzz;
-            vec4 iz1 = Pi1.zzzz;
-
-            vec4 ixy = permute(permute(ix) + iy);
-            vec4 ixy0 = permute(ixy + iz0);
-            vec4 ixy1 = permute(ixy + iz1);
-
-            vec4 gx0 = ixy0 / 7.0;
-            vec4 gy0 = fract(floor(gx0) / 7.0) - 0.5;
-            gx0 = fract(gx0);
-            vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
-            vec4 sz0 = step(gz0, vec4(0.0));
-            gx0 -= sz0 * (step(0.0, gx0) - 0.5);
-            gy0 -= sz0 * (step(0.0, gy0) - 0.5);
-
-            vec4 gx1 = ixy1 / 7.0;
-            vec4 gy1 = fract(floor(gx1) / 7.0) - 0.5;
-            gx1 = fract(gx1);
-            vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
-            vec4 sz1 = step(gz1, vec4(0.0));
-            gx1 -= sz1 * (step(0.0, gx1) - 0.5);
-            gy1 -= sz1 * (step(0.0, gy1) - 0.5);
-
-            vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
-            vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
-            vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
-            vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
-            vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
-            vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
-            vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
-            vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
-
-            vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
-            g000 *= norm0.x;
-            g010 *= norm0.y;
-            g100 *= norm0.z;
-            g110 *= norm0.w;
-            vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
-            g001 *= norm1.x;
-            g011 *= norm1.y;
-            g101 *= norm1.z;
-            g111 *= norm1.w;
-
-            float n000 = dot(g000, Pf0);
-            float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
-            float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
-            float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
-            float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
-            float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
-            float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
-            float n111 = dot(g111, Pf1);
-
-            vec3 fade_xyz = fade(Pf0);
-            vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
-            vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
-            float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
-            return 2.2 * n_xyz;
-          }
-
-          void main() {
-            // Background-cover logic for UVs
-            vec2 uv = vUv;
-            float scaleX = 1.0;
-            float scaleY = 1.0;
-            
-            if (uPlaneAspect > uImageAspect) {
-              scaleY = uImageAspect / uPlaneAspect;
-              uv.y = (uv.y - 0.5) * scaleY + 0.5;
-            } else {
-              scaleX = uPlaneAspect / uImageAspect;
-              uv.x = (uv.x - 0.5) * scaleX + 0.5;
-            }
-
-            vec4 texColor = texture2D(uTexture, uv);
-            
-            // Noise to simulate thick horizontal/diagonal paint strokes rolling over
-            float strokeNoise = cnoise(vec3(vUv.x * 2.0, vUv.y * 10.0, 0.0)) * 0.5 + 0.5;
-            float edgeNoise = cnoise(vec3(vUv.x * 10.0, vUv.y * 3.0, 1.0)) * 0.1;
-
-            // Slowly fill screen with paint from top to bottom (or right to left)
-            // Progress goes from 0 to something > 1
-            float progress = uTime * 0.15; 
-            
-            // Mask determines what is paint and what is image
-            // We'll roll the paint diagonally
-            float spread = (1.0 - vUv.x) * 0.4 + (1.0 - vUv.y) * 0.6; 
-            
-            // Threshold based on progress + noise
-            float paintMask = smoothstep(progress - 0.2, progress + 0.2, spread + strokeNoise * 0.3 + edgeNoise);
-            
-            // The paint layer (teal color) plus some subtle noise for texture
-            vec3 paintLayer = uPaintColor * (0.9 + strokeNoise * 0.2);
-
-            // Mix the image and the paint layer based on the mask
-            // When paintMask is 0, we see paint. When paintMask is 1, we see the image.
-            vec3 finalColor = mix(paintLayer, texColor.rgb, clamp(paintMask, 0.0, 1.0));
-
-            // Reduce overall brightness slightly if we are looking at the image to ensure text pops
-            vec3 dimmedTex = texColor.rgb * 0.6;
-            finalColor = mix(paintLayer, dimmedTex, clamp(paintMask, 0.0, 1.0));
-
-            gl_FragColor = vec4(finalColor, 1.0);
-          }
-        `
-      });
-
-      // Simple plane filling the viewport
-      const geometry = new THREE.PlaneGeometry(10, 10);
-      this.mesh = new THREE.Mesh(geometry, this.material);
-      this.scene.add(this.mesh);
+      // Sort strokes by delay so we draw the earliest ones first (layering)
+      this.strokes.sort((a, b) => a.delay - b.delay);
     }
 
     private bindEvents() {
-      window.addEventListener('resize', this.onResize.bind(this));
-      document.addEventListener('visibilitychange', this.onVisibilityChange.bind(this));
+      window.addEventListener('resize', () => {
+        this.resize();
+        // Force a redraw when resizing by resetting the start time slightly back 
+        // to prevent jarring flashes, though keeping it simple is best.
+        this.startTime = performance.now(); 
+      });
+      
+      document.addEventListener('visibilitychange', () => {
+        this.isVisible = !document.hidden;
+        if (this.isVisible) {
+          this.startTime = performance.now() - (this.animationDuration); // Pause effect basically
+          // Note: Full pause implementation requires tracking elapsed time.
+          // For a simple paint reveal, just letting it finish or static is fine.
+          this.animate();
+        } else {
+          cancelAnimationFrame(this.rafId);
+        }
+      });
     }
 
-    private onResize() {
-      if(!this.renderer) return;
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      this.renderer.setSize(width, height);
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-      if(this.material) {
-        this.material.uniforms.uPlaneAspect.value = width / height;
-      }
-    }
+    private drawStroke(stroke: any, progress: number) {
+      if (progress <= 0) return;
+      
+      // Calculate how far along the path this stroke should be (0 to 1)
+      const t = Math.min(1, progress); 
+      
+      // Current position
+      const currentX = stroke.startX + (stroke.endX - stroke.startX) * t;
+      const currentY = stroke.startY + (stroke.endY - stroke.startY) * t;
 
-    private onVisibilityChange() {
-      this.isVisible = !document.hidden;
-      if (this.isVisible) {
-        this.clock.start();
-        this.animate();
-      } else {
-        cancelAnimationFrame(this.rafId);
-        this.clock.stop();
-      }
+      this.ctx.beginPath();
+      this.ctx.moveTo(stroke.startX, stroke.startY);
+      this.ctx.lineTo(currentX, currentY);
+      
+      this.ctx.lineWidth = stroke.width;
+      this.ctx.lineCap = 'round';
+      this.ctx.lineJoin = 'round';
+      
+      // Solid teal color
+      this.ctx.strokeStyle = this.paintColor;
+      
+      // Draw it
+      this.ctx.stroke();
+      
+      // To make it look more like a roller, we can add a subtle noisy/faded edge
+      // by drawing slightly wider strokes with low opacity behind it, but simple solid lines
+      // look very clean and authentic for wide rollers.
     }
 
     private animate() {
-      if (!this.isVisible || !this.renderer) return;
+      if (!this.isVisible) return;
       this.rafId = requestAnimationFrame(this.animate.bind(this));
       
-      const delta = this.clock.getDelta();
-      // Only increment time up to a certain point so it doesn't loop infinitely 
-      // This stops the animation once the screen is fully painted teal
-      if (this.material.uniforms.uTime.value < 12.0) {
-        this.material.uniforms.uTime.value += delta;
+      const now = performance.now();
+      const elapsed = now - this.startTime;
+      const globalProgress = elapsed / this.animationDuration;
+
+      // Clear the canvas every frame before redrawing the growing strokes
+      this.ctx.clearRect(0, 0, this.width, this.height);
+
+      // Draw each stroke based on its individual timeline
+      for (const stroke of this.strokes) {
+        // Calculate the local progress for this specific stroke
+        // e.g., if global = 0.5, delay = 0.2, duration = 0.4
+        // localProgress = (0.5 - 0.2) / 0.4 = 0.3 / 0.4 = 0.75 (75% done)
+        const localElapsed = globalProgress - stroke.delay;
+        let localProgress = localElapsed / stroke.duration;
+        
+        if (localProgress > 0) {
+          this.drawStroke(stroke, localProgress);
+        }
       }
 
-      this.renderer.render(this.scene, this.camera);
+      // Stop animating if all strokes are completely drawn
+      if (globalProgress >= 1.5) { // Adding buffer to ensure everything finishes
+        cancelAnimationFrame(this.rafId);
+        // Fill entire screen as a final safety measure to ensure no gaps
+        this.ctx.fillStyle = this.paintColor;
+        this.ctx.fillRect(0, 0, this.width, this.height);
+      }
     }
   }
 
@@ -247,13 +206,18 @@
   if (!prefersReducedMotion) {
     const canvasEl = document.getElementById('hero-canvas') as HTMLCanvasElement;
     if (canvasEl) {
-      new PaintCanvas(canvasEl);
+      // Small delay on initialization to ensure page is visible
+      setTimeout(() => {
+        new PaintRollerCanvas(canvasEl);
+      }, 500); 
     }
   } else {
-    // If reduced motion, just show the background image
+    // If reduced motion, just show the fully painted teal background
+    const canvasEl = document.getElementById('hero-canvas') as HTMLCanvasElement;
+    if(canvasEl) canvasEl.style.display = 'none';
     const container = document.getElementById('canvas-container');
     if (container) {
-      container.innerHTML = '<img src="/images/interior-painting-contractor-syracuse-ny-gallagher-custom-finish.jpg" alt="Interior painting contractor" class="w-full h-full object-cover opacity-60" />';
+      container.style.backgroundColor = '#4a8f96'; // Solid teal
     }
   }
 </script>
