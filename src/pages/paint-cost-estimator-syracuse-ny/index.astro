@@ -4,9 +4,51 @@ import Estimator from '../../components/Estimator.astro';
 
 const title = "Paint Cost Estimator | Syracuse NY Painting Prices | Gallagher Custom Finish";
 const description = "Estimate your painting or staining project cost in Central New York. Based on real regional pricing. Free on-site estimates always available.";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Paint & Stain Cost Estimator — Central New York",
+    "description": "Interactive painting cost estimator for residential and commercial projects in Syracuse, Cortland, and Central New York. Based on real regional labor and material pricing.",
+    "url": "https://www.gallaghercustomfinish.com/paint-cost-estimator-syracuse-ny/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Gallagher Custom Finish",
+      "url": "https://www.gallaghercustomfinish.com"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Painting & Staining Cost Estimation",
+    "description": "Ballpark painting and staining cost estimates for Syracuse and Central New York, based on room size, project type, and current regional pricing.",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Gallagher Custom Finish",
+      "telephone": "+13156077246",
+      "url": "https://www.gallaghercustomfinish.com"
+    },
+    "areaServed": [
+      {"@type": "City", "name": "Syracuse", "addressRegion": "NY"},
+      {"@type": "City", "name": "Cortland", "addressRegion": "NY"},
+      {"@type": "City", "name": "Springfield", "addressRegion": "NY"},
+      {"@type": "AdministrativeArea", "name": "Central New York"}
+    ],
+    "serviceType": "Painting Cost Estimation",
+    "category": "Home Improvement"
+  }
+];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schema={schema}>
 
   <section class="pt-32 pb-20 bg-charcoal text-cream text-center border-b border-brass/20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

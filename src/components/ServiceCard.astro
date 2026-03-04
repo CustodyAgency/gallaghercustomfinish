@@ -4,9 +4,10 @@ export interface Props {
   scope: string;
   truth: string;
   iconPath: string; // SVG path d
+  href?: string;
 }
 
-const { title, scope, truth, iconPath } = Astro.props;
+const { title, scope, truth, iconPath, href = '/interior-exterior-painting-services-syracuse-ny/' } = Astro.props;
 ---
 <div class="bg-charcoal text-cream p-8 md:p-10 border border-gray-800 flex flex-col group relative overflow-hidden transition-colors hover:border-brass/30">
   <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50 pointer-events-none"></div>
@@ -19,17 +20,19 @@ const { title, scope, truth, iconPath } = Astro.props;
   
   <h3 class="font-heading font-bold text-xl lg:text-2xl mb-4 relative z-10 group-hover:text-brass transition-colors">{title}</h3>
   
-  <div class="mb-6 space-y-2 relative z-10">
-    <p class="text-base uppercase tracking-widest text-brass font-bold">Scope of Work</p>
+  <div class="mb-6 relative z-10">
     <p class="text-base text-gray-300 leading-relaxed">{scope}</p>
   </div>
 
-  <div class="mt-auto relative z-10 pt-6 border-t border-gray-800">
-    <p class="text-base uppercase tracking-widest text-gray-500 font-bold mb-2">The Hard Truth</p>
-    <p class="text-base text-gray-400 italic">"{truth}"</p>
+  <div class="mt-auto relative z-10 pt-6 border-t border-gray-800 space-y-3">
+    <p class="text-sm text-gray-400 italic">"{truth}"</p>
+    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+      <a href={href} class="inline-flex items-center justify-center text-sm font-bold text-cream border border-gray-600 hover:border-brass hover:text-brass px-4 py-2 transition-colors focus-visible:outline-brass rounded-sm">
+        Learn More &rarr;
+      </a>
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-flex items-center justify-center text-sm font-bold bg-brass text-charcoal hover:bg-cream px-4 py-2 transition-colors focus-visible:outline-cream rounded-sm">
+        Get a Quote
+      </a>
+    </div>
   </div>
-
-  <a href="/free-painting-estimate-syracuse-cortland-ny/" class="absolute inset-0 z-20 focus-visible:outline-brass" aria-label={`Get a quote for ${title}`}>
-    <span class="sr-only">Get a Quote for {title}</span>
-  </a>
 </div>

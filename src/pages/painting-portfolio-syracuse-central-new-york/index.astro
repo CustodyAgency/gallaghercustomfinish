@@ -71,9 +71,33 @@ const projects = [
 
 const title = "Painting Portfolio | Syracuse & Central NY | Gallagher Custom Finish";
 const description = "View our recent residential and commercial painting, staining, and cabinet refinishing projects across Syracuse, Cortland, and Central New York.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Painting Portfolio | Syracuse & Central NY | Gallagher Custom Finish",
+  "description": "A curated gallery of residential and commercial painting, staining, millwork, and specialty coating projects completed by Gallagher Custom Finish across Syracuse, Cortland, and Central New York.",
+  "url": "https://www.gallaghercustomfinish.com/painting-portfolio-syracuse-central-new-york/",
+  "author": {
+    "@type": "LocalBusiness",
+    "name": "Gallagher Custom Finish",
+    "url": "https://www.gallaghercustomfinish.com",
+    "telephone": "+13156077246"
+  },
+  "hasPart": projects.map(p => ({
+    "@type": "ImageObject",
+    "name": p.title,
+    "description": p.description,
+    "contentUrl": `https://www.gallaghercustomfinish.com${p.imagePath}`,
+    "author": {
+      "@type": "LocalBusiness",
+      "name": "Gallagher Custom Finish"
+    }
+  }))
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schema={schema}>
 
   <!-- Hero Section -->
   <section class="pt-32 pb-16 lg:pt-40 lg:pb-20 bg-charcoal text-cream border-b border-brass/20">

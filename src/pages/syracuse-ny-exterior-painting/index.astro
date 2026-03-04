@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+
+const title = "Exterior Painting Contractor Syracuse NY | Gallagher Custom Finish";
+const description = "Exterior painting and weatherproof coatings for homes and commercial buildings in Syracuse, Cortland and Central New York. Rot detection, elastomeric finishes, written warranties.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Exterior Painting & Coatings",
+  "description": "Professional exterior painting, weatherproofing, and protective coatings for residential and commercial properties in Central New York. Full inspection, rot identification, elastomeric finishes.",
+  "url": "https://www.gallaghercustomfinish.com/syracuse-ny-exterior-painting/",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Gallagher Custom Finish",
+    "telephone": "+13156077246",
+    "url": "https://www.gallaghercustomfinish.com"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Syracuse", "addressRegion": "NY"},
+    {"@type": "City", "name": "Cortland", "addressRegion": "NY"},
+    {"@type": "City", "name": "Ithaca", "addressRegion": "NY"},
+    {"@type": "City", "name": "Oswego", "addressRegion": "NY"},
+    {"@type": "AdministrativeArea", "name": "Central New York"}
+  ],
+  "serviceType": "Exterior Painting"
+};
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-40 bg-charcoal text-cream overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/exterior-painting-contractor-syracuse-ny-gallagher-custom-finish.jpg"
+        alt="Exterior painting of a Central New York home by Gallagher Custom Finish"
+        class="w-full h-full object-cover opacity-30"
+        width="1400" height="800"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal"></div>
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-brass font-bold uppercase tracking-widest text-sm mb-4">Exterior Coatings · Syracuse & Central New York</p>
+      <h1 class="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-cream mb-6 drop-shadow-md leading-tight">
+        Exterior Painting Built<br class="hidden md:block"/> for CNY Weather
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+        Central New York winters don't forgive shortcuts. Freeze-thaw cycles, lake-effect snow, and spring moisture test every coat. We prep for those conditions before a brush touches the surface.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-brass text-charcoal font-bold text-lg px-8 py-4 rounded hover:bg-cream transition-colors focus-visible:outline-cream">
+          Get a Free Estimate
+        </a>
+        <a href="#exterior-scope" class="inline-block border-2 border-cream text-cream font-bold text-lg px-8 py-4 rounded hover:bg-cream hover:text-charcoal transition-colors focus-visible:outline-cream">
+          See Our Process
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The CNY Problem -->
+  <section class="py-24 bg-cream text-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <h2 class="font-heading font-bold text-4xl mb-6">Why Exterior Work Is Different in Central New York</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The contractors who paint in climates without 100-inch snowfall seasons can cut corners that never get exposed. In Syracuse, Cortland, and the surrounding region, those shortcuts surface within two winters — literally. Caulk failures, peeling corners, faded finishes, and water infiltration that starts as a paint problem and becomes a structural one.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            We use elastomeric and weather-rated coatings designed to expand and contract through temperature swings. We caulk every joint — even the ones a spray crew would leave. And before any product goes on, we walk the structure looking for what other contractors paint over.
+          </p>
+          <div class="bg-charcoal text-cream p-6 rounded-sm border-l-4 border-brass">
+            <p class="font-bold text-brass mb-2 uppercase tracking-widest text-sm">The Hard Truth</p>
+            <p class="text-gray-300 italic leading-relaxed">"Painting over rot or failed caulk is hiding a problem, not fixing it. We find it first — even when it means the job takes longer."</p>
+          </div>
+        </div>
+
+        <div id="exterior-scope" class="space-y-8">
+          <div class="bg-gray-50 border border-gray-200 p-8 rounded-sm">
+            <h3 class="font-heading font-bold text-2xl mb-4">Standard Exterior Scope of Work</h3>
+            <ul class="space-y-3 text-gray-700">
+              {[
+                "Full perimeter inspection — siding, trim, fascia, soffits",
+                "Rot probing and identification before quoting",
+                "Power washing to manufacturer-spec surface profile",
+                "Hand-scraping all loose, alligatored, or peeling paint",
+                "Caulk removal and re-application at all joints and penetrations",
+                "Spot-prime bare wood with oil-based or adhesion primer",
+                "Full coat of weather-rated exterior primer",
+                "Two coats of elastomeric or climate-rated finish paint",
+                "Final walkthrough, touch-up, cleanup",
+              ].map(item => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-brass flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="bg-charcoal text-cream p-8 rounded-sm border border-gray-800">
+            <h3 class="font-heading font-bold text-xl text-brass mb-3">What We Coat</h3>
+            <ul class="grid grid-cols-2 gap-2 text-gray-300 text-base">
+              {["Wood siding", "Vinyl & composite", "Brick & masonry", "Aluminum siding", "Stucco", "Cedar shingles", "Metal trim", "Fencing & decks"].map(s => (
+                <li class="flex items-center gap-2"><span class="text-brass">—</span>{s}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Gallagher -->
+  <section class="py-24 bg-charcoal text-cream border-t border-brass/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-4xl md:text-5xl text-center mb-16">The Gallagher Standard on Exterior Work</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            heading: "We Find the Rot",
+            body: "Two other contractors may have quoted your job without finding the water damage under the corner boards. We look, we tell you, and we won't paint over it."
+          },
+          {
+            heading: "No Crew Turnover",
+            body: "Same team, start to finish. Exterior work on occupied homes requires trust. We earn it by sending the same people back every day."
+          },
+          {
+            heading: "10-Year Written Warranty",
+            body: "Our exterior work carries the longest warranty we offer. The products and application earn it. We back it in writing."
+          }
+        ].map(card => (
+          <div class="bg-gray-900 border border-gray-800 p-8 rounded-sm hover:border-brass/30 transition-colors">
+            <h3 class="font-heading font-bold text-xl text-brass mb-4">{card.heading}</h3>
+            <p class="text-gray-300 leading-relaxed">{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+  <!-- CTA -->
+  <section class="py-24 bg-cream text-charcoal border-t border-gray-200 text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-heading font-bold text-4xl mb-6">Get an Honest Exterior Assessment</h2>
+      <p class="text-lg text-gray-600 mb-10">We'll walk the job, tell you what we see — including anything other contractors might leave out of their bids — and give you a real number.</p>
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-charcoal text-cream font-bold text-lg px-10 py-4 rounded hover:bg-brass hover:text-charcoal transition-colors focus-visible:outline-brass">
+        Schedule a Free Estimate
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

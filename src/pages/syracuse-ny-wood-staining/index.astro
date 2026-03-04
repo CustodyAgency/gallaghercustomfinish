@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+
+const title = "Wood Staining Contractor Syracuse NY | Gallagher Custom Finish";
+const description = "Custom wood staining for decks, siding, fences, and interior millwork in Syracuse, Cortland, and Central New York. Grain conditioning, UV topcoats, 75 years experience.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Custom Wood Staining",
+  "description": "Professional wood staining for decks, fences, siding, and interior millwork in Central New York. Includes grain prep, conditioning, solid or semi-transparent stain, and UV topcoat.",
+  "url": "https://www.gallaghercustomfinish.com/syracuse-ny-wood-staining/",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Gallagher Custom Finish",
+    "telephone": "+13156077246",
+    "url": "https://www.gallaghercustomfinish.com"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Syracuse", "addressRegion": "NY"},
+    {"@type": "City", "name": "Cortland", "addressRegion": "NY"},
+    {"@type": "City", "name": "Cazenovia", "addressRegion": "NY"},
+    {"@type": "AdministrativeArea", "name": "Central New York"}
+  ],
+  "serviceType": "Wood Staining"
+};
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-40 bg-charcoal text-cream overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/wood-staining-contractor-syracuse-ny-gallagher-custom-finish.jpg"
+        alt="Custom wood staining work by Gallagher Custom Finish, Central New York"
+        class="w-full h-full object-cover opacity-30"
+        width="1400" height="800"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal"></div>
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-brass font-bold uppercase tracking-widest text-sm mb-4">Custom Wood Staining · Syracuse & Central New York</p>
+      <h1 class="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-cream mb-6 drop-shadow-md leading-tight">
+        Wood Staining Done Right<br class="hidden md:block"/> the First Time
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+        Staining isn't just applying color. It's surface preparation, grain conditioning, correct product selection, and a topcoat that keeps Central New York's seasons from undoing all of it.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-brass text-charcoal font-bold text-lg px-8 py-4 rounded hover:bg-cream transition-colors focus-visible:outline-cream">
+          Get a Free Estimate
+        </a>
+        <a href="#staining-process" class="inline-block border-2 border-cream text-cream font-bold text-lg px-8 py-4 rounded hover:bg-cream hover:text-charcoal transition-colors focus-visible:outline-cream">
+          Our Process
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why It Matters -->
+  <section class="py-24 bg-cream text-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <h2 class="font-heading font-bold text-4xl mb-6">Why Most Staining Jobs Fail Early</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Stain applied to unconditioned wood blotches. It raises the grain. On soft woods like pine, it absorbs unevenly in ways that can't be fixed with another coat. The only remedy is sanding back to bare wood and starting over — and if that wood is already on a deck or exterior surface, that's a significant job.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The second most common failure is skipping the UV topcoat on exterior work. A stain that looks perfect in June will be grey and peeling by October if it's not properly sealed against Central New York sun and frost cycles.
+          </p>
+          <div class="bg-charcoal text-cream p-6 rounded-sm border-l-4 border-brass">
+            <p class="font-bold text-brass mb-2 uppercase tracking-widest text-sm">The Hard Truth</p>
+            <p class="text-gray-300 italic leading-relaxed">"Stain without conditioning blotches and raises grain. It can't be undone without sanding back to bare wood. We don't skip that step."</p>
+          </div>
+        </div>
+
+        <div id="staining-process" class="space-y-8">
+          <div class="bg-gray-50 border border-gray-200 p-8 rounded-sm">
+            <h3 class="font-heading font-bold text-2xl mb-4">Our Standard Staining Process</h3>
+            <ul class="space-y-3 text-gray-700">
+              {[
+                "Wood species identification — stain reaction varies significantly",
+                "Cleaning and removal of previous failing stain or sealer",
+                "Sanding to correct surface profile and open grain",
+                "Pre-stain wood conditioner on all soft and blotch-prone species",
+                "Test application on an inconspicuous area before full commitment",
+                "Solid or semi-transparent stain applied by correct method for species",
+                "UV-resistant topcoat or varnish on exterior applications",
+                "Final inspection and touch-up by lead finisher",
+              ].map(item => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-brass flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="bg-charcoal text-cream p-8 rounded-sm border border-gray-800">
+            <h3 class="font-heading font-bold text-xl text-brass mb-3">What We Stain</h3>
+            <ul class="grid grid-cols-2 gap-2 text-gray-300 text-base">
+              {["Decks & porches", "Cedar siding", "Fencing", "Garage doors", "Interior floors", "Interior millwork", "Log cabins", "Pergolas & structures"].map(s => (
+                <li class="flex items-center gap-2"><span class="text-brass">—</span>{s}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Gallagher -->
+  <section class="py-24 bg-charcoal text-cream border-t border-brass/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-4xl md:text-5xl text-center mb-16">Craftsmen Who Understand Wood</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            heading: "Species-Specific Experience",
+            body: "Pine, cedar, oak, walnut — each species stains differently. Our finishers have worked with them all, including the old-growth species common in Central New York's historic homes."
+          },
+          {
+            heading: "Period-Matched Staining",
+            body: "Working on a historic property? We can color-match to original finishes, archived photos, or period-accurate references. We've done it on landmark buildings across the region."
+          },
+          {
+            heading: "No Subcontractors",
+            body: "Custom staining is skilled work. We don't hand it to whoever's available. Every staining job is done by trained Gallagher employees, accountable to our standard."
+          }
+        ].map(card => (
+          <div class="bg-gray-900 border border-gray-800 p-8 rounded-sm hover:border-brass/30 transition-colors">
+            <h3 class="font-heading font-bold text-xl text-brass mb-4">{card.heading}</h3>
+            <p class="text-gray-300 leading-relaxed">{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+  <!-- CTA -->
+  <section class="py-24 bg-cream text-charcoal border-t border-gray-200 text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-heading font-bold text-4xl mb-6">Let's Talk About Your Wood</h2>
+      <p class="text-lg text-gray-600 mb-10">Whether it's a CNY farmhouse deck or a historic interior floor, we'll assess the species, condition, and right approach before we touch it.</p>
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-charcoal text-cream font-bold text-lg px-10 py-4 rounded hover:bg-brass hover:text-charcoal transition-colors focus-visible:outline-brass">
+        Schedule a Free Estimate
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

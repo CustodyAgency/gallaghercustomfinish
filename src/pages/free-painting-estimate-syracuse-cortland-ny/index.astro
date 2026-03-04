@@ -4,9 +4,57 @@ import LeadForm from '../../components/LeadForm.astro';
 
 const title = "Free Painting Estimate | Syracuse & Cortland NY | Gallagher Custom Finish";
 const description = "Request a free on-site estimate for painting, staining or finishing work in Syracuse, Cortland, Springfield and Central New York. 315-607-PAINT.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Free On-Site Painting Estimate",
+  "description": "Free, no-obligation on-site estimates for interior and exterior painting, staining, cabinet refinishing, and specialty coatings across Central New York. Line-item breakdowns. No pressure.",
+  "url": "https://www.gallaghercustomfinish.com/free-painting-estimate-syracuse-cortland-ny/",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Gallagher Custom Finish",
+    "telephone": "+13156077246",
+    "email": "estimates@gallaghercustomfinish.com",
+    "url": "https://www.gallaghercustomfinish.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cortland",
+      "addressRegion": "NY",
+      "addressCountry": "US"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "07:00",
+        "closes": "17:00"
+      }
+    ]
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Syracuse", "addressRegion": "NY"},
+    {"@type": "City", "name": "Cortland", "addressRegion": "NY"},
+    {"@type": "City", "name": "Springfield", "addressRegion": "NY"},
+    {"@type": "City", "name": "Auburn", "addressRegion": "NY"},
+    {"@type": "City", "name": "Oswego", "addressRegion": "NY"},
+    {"@type": "City", "name": "Utica", "addressRegion": "NY"},
+    {"@type": "City", "name": "Ithaca", "addressRegion": "NY"},
+    {"@type": "AdministrativeArea", "name": "Central New York"}
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free on-site estimate with no obligation",
+    "availability": "https://schema.org/InStock"
+  },
+  "serviceType": "Painting Estimate",
+  "category": "Home Improvement"
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schema={schema}>
 
   <!-- Hero with Form Overlay -->
   <section class="relative pt-32 pb-48 lg:pt-48 lg:pb-64 bg-charcoal">

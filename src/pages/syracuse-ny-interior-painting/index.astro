@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+
+const title = "Interior Painting Contractor Syracuse NY | Gallagher Custom Finish";
+const description = "Professional interior painting and finishing in Syracuse, Cortland, and Central New York. No subcontractors, meticulous prep, written warranties. 75 years family-owned.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Interior Painting & Finishing",
+  "description": "Full interior painting and finishing services for residential and commercial properties in Central New York. Includes surface repair, priming, and minimum two finish coats.",
+  "url": "https://www.gallaghercustomfinish.com/syracuse-ny-interior-painting/",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Gallagher Custom Finish",
+    "telephone": "+13156077246",
+    "url": "https://www.gallaghercustomfinish.com"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Syracuse", "addressRegion": "NY"},
+    {"@type": "City", "name": "Cortland", "addressRegion": "NY"},
+    {"@type": "City", "name": "Auburn", "addressRegion": "NY"},
+    {"@type": "City", "name": "Oswego", "addressRegion": "NY"},
+    {"@type": "AdministrativeArea", "name": "Central New York"}
+  ],
+  "serviceType": "Interior Painting",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "areaServed": "Central New York"
+  }
+};
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-40 bg-charcoal text-cream overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/interior-painting-contractor-syracuse-ny-gallagher-custom-finish.jpg"
+        alt="Interior painting in progress by Gallagher Custom Finish, Syracuse NY"
+        class="w-full h-full object-cover opacity-30"
+        width="1400" height="800"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal"></div>
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-brass font-bold uppercase tracking-widest text-sm mb-4">Interior Finishing · Syracuse & Central New York</p>
+      <h1 class="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-cream mb-6 drop-shadow-md leading-tight">
+        Interior Painting That<br class="hidden md:block"/> Holds Up to CNY Living
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+        Seventy-five years of Central New York winters, humid summers, and plaster walls. We know this region's buildings — and what it takes to make a finish last in them.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-brass text-charcoal font-bold text-lg px-8 py-4 rounded hover:bg-cream transition-colors focus-visible:outline-cream">
+          Get a Free Estimate
+        </a>
+        <a href="#what-we-do" class="inline-block border-2 border-cream text-cream font-bold text-lg px-8 py-4 rounded hover:bg-cream hover:text-charcoal transition-colors focus-visible:outline-cream">
+          See What's Included
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section id="what-we-do" class="py-24 bg-cream text-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <h2 class="font-heading font-bold text-4xl mb-6">What Interior Finishing Actually Involves</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Most people think of painting as the part where color goes on the wall. We think of it as the last 20% of the job. The other 80% — patching, sanding, priming, protecting — is what separates a finish that looks great in March from one that still looks great in March three years later.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-10">
+            Gallagher crews don't subcontract. Every painter who enters your home is a Gallagher employee, trained to our standard, accountable to us. That's been true since 1950.
+          </p>
+
+          <h3 class="font-heading font-bold text-2xl mb-4 text-charcoal">Standard Scope of Work</h3>
+          <ul class="space-y-4 mb-10">
+            {[
+              "Surface inspection and repair — nail pops, cracks, drywall voids",
+              "Full plaster and drywall patching where required",
+              "Sanding and skim coat where surface demands it",
+              "Oil-based or shellac spot-prime on stains and bare wood",
+              "Full-coverage latex prime coat on all repainted surfaces",
+              "Minimum two finish coats — hand-cut, rolled, or sprayed by application",
+              "Complete masking and floor protection — nothing gets painted that shouldn't",
+              "Daily cleanup, final walkthrough, touch-up before sign-off",
+            ].map(item => (
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-brass flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-gray-700">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="space-y-8">
+          <div class="bg-charcoal text-cream p-8 rounded-sm border border-gray-800">
+            <h3 class="font-heading font-bold text-2xl text-brass mb-4">The CNY Reality Check</h3>
+            <p class="text-gray-300 leading-relaxed mb-4">
+              Syracuse area homes see humidity swings that crack paint, old-growth plaster that doesn't take cheap primer, and basements that migrate moisture into first-floor walls. A coat that holds in Phoenix won't necessarily hold here.
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+              We select products rated for Central New York's climate — not the cheapest option on the contractor price sheet. And we apply them the way the manufacturer actually recommends, not the way that's fastest.
+            </p>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 p-8 rounded-sm">
+            <h3 class="font-heading font-bold text-2xl mb-4">Interior Services We Cover</h3>
+            <ul class="space-y-2 text-gray-700">
+              {[
+                "Full room and whole-home interior repaints",
+                "New construction move-in finishes",
+                "Historic home plaster work and period-matched finishes",
+                "Accent walls and decorative finishes",
+                "Ceiling painting and popcorn removal prep",
+                "Stairwell and high-wall specialty access",
+                "Rental unit turnover painting",
+                "Commercial interior office and retail",
+              ].map(s => (
+                <li class="flex items-start gap-2">
+                  <span class="text-brass font-bold mt-0.5">—</span>
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Gallagher -->
+  <section class="py-24 bg-charcoal text-cream border-t border-brass/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="font-heading font-bold text-4xl md:text-5xl mb-6">75 Years of Finishing What We Start</h2>
+        <p class="text-xl text-gray-300 leading-relaxed">
+          Three generations of Gallaghers have finished interior work in Syracuse, Cortland, Auburn, Oswego and every county in between. Not a single job abandoned. Not one.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            heading: "No Subcontractors. Ever.",
+            body: "Every painter is a direct Gallagher employee. You'll be told their name before they arrive, and you'll see the same faces start to finish."
+          },
+          {
+            heading: "Written, Itemized Estimates",
+            body: "We don't give you a number on a napkin. You get a line-item breakdown — every surface, every product specified by brand and sheen."
+          },
+          {
+            heading: "Written Warranty",
+            body: "Our interior work is backed in writing. If it fails due to application, we come back. That's been our standard since Thomas Francis Gallagher started this company."
+          }
+        ].map(card => (
+          <div class="bg-gray-900 border border-gray-800 p-8 rounded-sm hover:border-brass/30 transition-colors">
+            <h3 class="font-heading font-bold text-xl text-brass mb-4">{card.heading}</h3>
+            <p class="text-gray-300 leading-relaxed">{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+  <!-- CTA -->
+  <section class="py-24 bg-cream text-charcoal border-t border-gray-200 text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-heading font-bold text-4xl mb-6">Ready to talk about your project?</h2>
+      <p class="text-lg text-gray-600 mb-10">We respond within one business day. No pressure. Just an honest look at what you need and what it will cost.</p>
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-charcoal text-cream font-bold text-lg px-10 py-4 rounded hover:bg-brass hover:text-charcoal transition-colors focus-visible:outline-brass">
+        Schedule a Free Estimate
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

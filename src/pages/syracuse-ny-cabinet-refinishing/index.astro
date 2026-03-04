@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+
+const title = "Cabinet Refinishing Syracuse NY | Gallagher Custom Finish";
+const description = "Professional cabinet refinishing in Syracuse, Cortland, and Central New York. Spray-applied factory-smooth finish. Far more affordable than cabinet replacement. Call 315-607-PAINT.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Cabinet Refinishing",
+  "description": "Full cabinet refinishing service including deglossing, priming, and spray-applied factory-smooth topcoat. Serving Syracuse, Cortland, and Central New York. A fraction of the cost of replacement.",
+  "url": "https://www.gallaghercustomfinish.com/syracuse-ny-cabinet-refinishing/",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Gallagher Custom Finish",
+    "telephone": "+13156077246",
+    "url": "https://www.gallaghercustomfinish.com"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Syracuse", "addressRegion": "NY"},
+    {"@type": "City", "name": "Cortland", "addressRegion": "NY"},
+    {"@type": "City", "name": "Ithaca", "addressRegion": "NY"},
+    {"@type": "AdministrativeArea", "name": "Central New York"}
+  ],
+  "serviceType": "Cabinet Refinishing"
+};
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-40 bg-charcoal text-cream overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/cabinet-refinishing-contractor-syracuse-ny-gallagher-custom-finish.jpg"
+        alt="Kitchen cabinet refinishing by Gallagher Custom Finish, Syracuse NY"
+        class="w-full h-full object-cover opacity-30"
+        width="1400" height="800"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal"></div>
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-brass font-bold uppercase tracking-widest text-sm mb-4">Cabinet Refinishing · Syracuse & Central New York</p>
+      <h1 class="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-cream mb-6 drop-shadow-md leading-tight">
+        New-Looking Cabinets.<br class="hidden md:block"/> Not a New Kitchen.
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+        Cabinet replacement can run $20,000–$50,000 in Central New York. Refinishing with a factory-smooth spray finish costs a fraction of that — and guests won't be able to tell the difference.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-brass text-charcoal font-bold text-lg px-8 py-4 rounded hover:bg-cream transition-colors focus-visible:outline-cream">
+          Get a Free Estimate
+        </a>
+        <a href="#cabinet-process" class="inline-block border-2 border-cream text-cream font-bold text-lg px-8 py-4 rounded hover:bg-cream hover:text-charcoal transition-colors focus-visible:outline-cream">
+          Our Process
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Refinish -->
+  <section class="py-24 bg-cream text-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <h2 class="font-heading font-bold text-4xl mb-6">Why Most Cabinet Painting Jobs Fail</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Roll-applied cabinet paint looks fine at first — until it doesn't. The texture is obvious in raking light. The edges chip where hardware meets the door. Within a year, the finish looks like a DIY job even if a professional applied it.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Spray-applied cabinet finish eliminates the roller texture entirely. Done with proper deglossing, bonding primer, and a durable catalyzed topcoat, it holds up to kitchen conditions for years — not months.
+          </p>
+          <div class="bg-charcoal text-cream p-6 rounded-sm border-l-4 border-brass mb-8">
+            <p class="font-bold text-brass mb-2 uppercase tracking-widest text-sm">Real Customer Result</p>
+            <p class="text-gray-300 italic leading-relaxed">"I was quoted $28,000 to replace my kitchen cabinets. Six months after Gallagher refinished them, guests ask if I got new ones." — Diane H., Ithaca NY</p>
+          </div>
+          <h3 class="font-heading font-bold text-2xl mb-4">Is Refinishing Right for Your Cabinets?</h3>
+          <p class="text-gray-700 leading-relaxed mb-4">Refinishing works best when cabinet boxes and doors are structurally sound. We'll assess the following during our free estimate:</p>
+          <ul class="space-y-2 text-gray-700">
+            {[
+              "Door and box integrity — no delaminating or water damage",
+              "Hardware condition and upgrade potential",
+              "Finish adhesion — some existing coatings need to be stripped, not just sanded",
+              "Layout suitability — not all kitchens are good candidates",
+            ].map(item => (
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-brass flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div id="cabinet-process" class="space-y-8">
+          <div class="bg-gray-50 border border-gray-200 p-8 rounded-sm">
+            <h3 class="font-heading font-bold text-2xl mb-4">Our Cabinet Refinishing Process</h3>
+            <ul class="space-y-3 text-gray-700">
+              {[
+                "Remove all doors, drawers, and hardware",
+                "Label all components for correct reinstallation",
+                "Full deglossingof existing finish to achieve adhesion",
+                "Light scuff-sand all surfaces to proper profile",
+                "Bonding primer applied to all surfaces",
+                "Light sanding between primer and topcoat",
+                "Two coats of catalyzed or alkyd-based enamel, spray-applied",
+                "Replace hardware, rehang doors, adjust for fit",
+                "Final kitchen walkthrough and touch-up before sign-off",
+              ].map(item => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-brass flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="bg-charcoal text-cream p-8 rounded-sm border border-gray-800">
+            <h3 class="font-heading font-bold text-xl text-brass mb-3">Finishes We Apply</h3>
+            <ul class="space-y-2 text-gray-300 text-base">
+              {[
+                "Alkyd enamel — durable, traditional",
+                "Waterborne catalyzed enamel — hard, fast cure, low VOC",
+                "Two-component polyurethane — commercial-grade hardness",
+                "Custom color matching — any paint brand or chip",
+              ].map(s => (
+                <li class="flex items-center gap-2"><span class="text-brass">—</span>{s}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Gallagher -->
+  <section class="py-24 bg-charcoal text-cream border-t border-brass/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-4xl md:text-5xl text-center mb-16">We Finish Cabinets. Not Just Paint Them.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            heading: "Spray-Booth Quality On-Site",
+            body: "Our spray process replicates what a factory finish looks like. Proper containment, proper tip, proper reduction — not just a spray gun pointed at a door on a drop cloth."
+          },
+          {
+            heading: "No Subcontractors",
+            body: "Cabinet finishing is too detail-intensive to hand off. Every Gallagher cabinet job is done by our own trained finishers, not whoever's available from a labor pool."
+          },
+          {
+            heading: "Serving CNY Kitchens Since 1950",
+            body: "We've seen every type of Central New York home kitchen — post-war oak, 1990s maple, 2000s MDF. We know what products and processes work on each."
+          }
+        ].map(card => (
+          <div class="bg-gray-900 border border-gray-800 p-8 rounded-sm hover:border-brass/30 transition-colors">
+            <h3 class="font-heading font-bold text-xl text-brass mb-4">{card.heading}</h3>
+            <p class="text-gray-300 leading-relaxed">{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+  <!-- CTA -->
+  <section class="py-24 bg-cream text-charcoal border-t border-gray-200 text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-heading font-bold text-4xl mb-6">Before You Call a Kitchen Contractor, Call Us</h2>
+      <p class="text-lg text-gray-600 mb-10">We'll assess your cabinets for free and tell you honestly whether refinishing is the right move — and what it will actually cost.</p>
+      <a href="/free-painting-estimate-syracuse-cortland-ny/" class="inline-block bg-charcoal text-cream font-bold text-lg px-10 py-4 rounded hover:bg-brass hover:text-charcoal transition-colors focus-visible:outline-brass">
+        Schedule a Free Estimate
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
